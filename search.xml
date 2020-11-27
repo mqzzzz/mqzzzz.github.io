@@ -43,17 +43,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/mqzzzz.github.io/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora完全使用教程</title>
     <url>/mqzzzz.github.io/post/9eac314.html</url>
     <content><![CDATA[<h2 id="一、Typora基本语法指南"><a href="#一、Typora基本语法指南" class="headerlink" title="一、Typora基本语法指南"></a>一、Typora基本语法指南</h2><h3 id="Typora简介"><a href="#Typora简介" class="headerlink" title="Typora简介"></a>Typora简介</h3><p>Typora是一款轻便简洁的Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。即时渲染使得你写Markdown就想是写Word文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
@@ -291,7 +280,7 @@
 <p>2.2 配置七牛云图床</p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132149270.png" alt="image-20200427105207374"></p>
 <p>七牛云的配置购买很简单，可以通过<a href="https://portal.qiniu.com/signup?code=1hjikucr9mmoi">以下链接</a>直接购买并使用，</p>
-<p>具体配置如何购买及配置域名相关流程可以参考我另一篇文章<a href="https://www.jianshu.com/p/29f33ca6e491">OpenWrite 编辑器如何配置七牛云</a></p>
+<p>具体配置如何购买及配置域名相关流程可以参考文章<a href="https://www.jianshu.com/p/29f33ca6e491">OpenWrite 编辑器如何配置七牛云</a></p>
 <p>2.3 通过 2.2 的链接购买七牛云之后，到七牛云的界面进行配置</p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132149446.png" alt="image-20200427105806627"></p>
 <p>2.4 上传文件，检验是否配置成功</p>
@@ -328,6 +317,17 @@
       </categories>
       <tags>
         <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/mqzzzz.github.io/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
 </search>
