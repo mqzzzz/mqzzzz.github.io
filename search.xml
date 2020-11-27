@@ -24,6 +24,25 @@
       </tags>
   </entry>
   <entry>
+    <title>IdentityServer4脱坑记录</title>
+    <url>/mqzzzz.github.io/post/31c3f66a.html</url>
+    <content><![CDATA[<p>由于是老项目升级.net5比较费劲，又需要加入ids，过程比较曲折</p>
+<p>终归还是配置问题</p>
+<p>V4版本需要设置以下属性才能兼容.net framework webapi</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitStaticAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>V3版本需要设置一下属性才能兼容.net framework webapi</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitLegacyResourceAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>IdentityServer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows Terminal 终极美化</title>
     <url>/mqzzzz.github.io/post/ec878511.html</url>
     <content><![CDATA[]]></content>
@@ -35,8 +54,8 @@
       </tags>
   </entry>
   <entry>
-    <title>自动部署测试sdsss</title>
-    <url>/mqzzzz.github.io/post/e4c9b112.html</url>
+    <title>测试文章</title>
+    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>技术</category>
@@ -46,8 +65,8 @@
       </tags>
   </entry>
   <entry>
-    <title>测试文章</title>
-    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
+    <title>自动部署测试sdsss</title>
+    <url>/mqzzzz.github.io/post/e4c9b112.html</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>技术</category>
