@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/mqzzzz.github.io/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo新建博文</title>
     <url>/mqzzzz.github.io/post/884863d2.html</url>
     <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
@@ -35,8 +24,8 @@
       </tags>
   </entry>
   <entry>
-    <title>自动部署测试sdsss</title>
-    <url>/mqzzzz.github.io/post/e4c9b112.html</url>
+    <title>测试文章</title>
+    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>技术</category>
@@ -46,8 +35,19 @@
       </tags>
   </entry>
   <entry>
-    <title>测试文章</title>
-    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
+    <title>Windows Terminal 终极美化</title>
+    <url>/mqzzzz.github.io/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自动部署测试sdsss</title>
+    <url>/mqzzzz.github.io/post/e4c9b112.html</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>技术</category>
