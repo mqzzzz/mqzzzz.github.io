@@ -24,6 +24,28 @@
       </tags>
   </entry>
   <entry>
+    <title>测试文章</title>
+    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/mqzzzz.github.io/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IdentityServer4脱坑记录</title>
     <url>/mqzzzz.github.io/post/31c3f66a.html</url>
     <content><![CDATA[<p>由于是老项目升级.net5比较费劲，又需要加入ids，过程比较曲折</p>
@@ -40,28 +62,6 @@
       </categories>
       <tags>
         <tag>IdentityServer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/mqzzzz.github.io/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试文章</title>
-    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
       </tags>
   </entry>
 </search>
