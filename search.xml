@@ -43,17 +43,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/mqzzzz.github.io/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typora完全使用教程</title>
     <url>/mqzzzz.github.io/post/9eac314.html</url>
     <content><![CDATA[<h2 id="一、Typora基本语法指南"><a href="#一、Typora基本语法指南" class="headerlink" title="一、Typora基本语法指南"></a>一、Typora基本语法指南</h2><h3 id="Typora简介"><a href="#Typora简介" class="headerlink" title="Typora简介"></a>Typora简介</h3><p>Typora是一款轻便简洁的Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。即时渲染使得你写Markdown就想是写Word文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
@@ -317,6 +306,17 @@
       </categories>
       <tags>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/mqzzzz.github.io/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
