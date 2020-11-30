@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C#调用pyd</title>
+    <url>/mqzzzz.github.io/post/296ae744.html</url>
+    <content><![CDATA[<p>python打包成pyd在本篇博客不多叙述，请读者自行百度，本篇博客主要讲解在C#中如何调用pyd以及遇到的一些问题如何解决。</p>
+<h2 id="1-安装pythonnet"><a href="#1-安装pythonnet" class="headerlink" title="1.安装pythonnet"></a>1.安装pythonnet</h2><p>pythonnet是一个强大的工具包，用于C#代码与python代码进行交互，不仅可以实现在C#中调用python，也可以实现在python中调用C#.</p>
+<p>GitHub：<a href="https://github.com/pythonnet/pythonnet">https://github.com/pythonnet/pythonnet</a></p>
+<ul>
+<li>首先打开nuget包管理器：<br><img data-src="https://res.aimon.cc/img/20201130164610.png" alt="Alt"></li>
+<li>根据你python的版本下载对应的pythonnet，笔者使用的是python3.6，所以下载的是py36。<br><img data-src="https://res.aimon.cc/img/20201130164611.png" alt="Alt"></li>
+</ul>
+<h2 id="2-调用pyd中的模块"><a href="#2-调用pyd中的模块" class="headerlink" title="2.调用pyd中的模块"></a>2.调用pyd中的模块</h2><ul>
+<li>首先引用pythonnet：</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> Python.Runtime;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>调用pyd的模块：</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//All calls to python should be inside a using (Py.GIL()) &#123;/* Your code here */&#125; block.</span></span><br><span class="line"><span class="keyword">using</span> (Py.GIL())</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//Import python modules using dynamic mod = Py.Import(&quot;mod&quot;), then you can call functions as normal.</span></span><br><span class="line">	<span class="comment">//All python objects should be declared as dynamic type.</span></span><br><span class="line">	<span class="built_in">dynamic</span> np = Py.Import(<span class="string">&quot;test_pyd&quot;</span>);</span><br><span class="line">	np.hello();</span><br><span class="line">	Console.ReadKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201130164612.png" alt="Alt"></p>
+<ul>
+<li>python代码：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    print(<span class="string">&quot;Hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-可能出现的问题及解决方案"><a href="#3-可能出现的问题及解决方案" class="headerlink" title="3.可能出现的问题及解决方案"></a>3.可能出现的问题及解决方案</h2><ul>
+<li>环境变量的配置，环境变量的对应路径的python版本需要与你下载的pythonnet包版本是相同的：<br><img data-src="https://res.aimon.cc/img/20201130164613.png" alt="Alt"><br>笔者电脑中有不同版本的python，经过笔者测试后发现更换版本最简单的方式是替换环境变量的顺序，笔者是在win10系统下进行的测试，其他系统未进行过测试。<br>另外要注意你的pyd如果是使用64位编译的，则环境变量对应的python版本也需要是64位的。<br>当python368在上时：<br><img data-src="https://res.aimon.cc/img/20201130164614.png" alt="Alt"><br>当python378在上时：<br><img data-src="https://res.aimon.cc/img/20201130164615.png" alt="Alt"></li>
+<li>System.DllNotFoundException:“无法加载 DLL“python36”: 找不到指定的模块。<br><img data-src="https://res.aimon.cc/img/20201130164616.png" alt="Alt"><br>解决方案：将python文件夹中的python36.dll复制到debug目录下<br><img data-src="https://res.aimon.cc/img/20201130164617.png" alt="Alt"></li>
+<li>Python.Runtime.PythonException:“ModuleNotFoundError : No module named ‘test_pyd’”</li>
+</ul>
+<p><img data-src="https://res.aimon.cc/img/20201130164618.png" alt="Alt"><br>解决方案：将test_pyd.pyd放入debug目录下<br><img data-src="https://res.aimon.cc/img/20201130164619.png" alt="Alt"></p>
+<ul>
+<li>System.MissingMethodException:“Method not found: ‘System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)’.”<br><img data-src="https://res.aimon.cc/img/20201130164620.png" alt="Alt"><br>解决方案：该问题是由于.NET框架所导致的，笔者在使用.NET Core 3.1的时候就会出现这个错误，更换为.NET Framework 4.7.2后问题解决。<br><img data-src="https://res.aimon.cc/img/20201130164621.png" alt="Alt"><br><img data-src="https://res.aimon.cc/img/20201130164622.png" alt="在这里插入图片描述"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>c#</category>
+      </categories>
+      <tags>
+        <tag>c#</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo新建博文</title>
     <url>/mqzzzz.github.io/post/884863d2.html</url>
     <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
@@ -40,28 +83,6 @@
       </categories>
       <tags>
         <tag>IdentityServer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/mqzzzz.github.io/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试文章</title>
-    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -328,6 +349,28 @@
       </categories>
       <tags>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/mqzzzz.github.io/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>测试文章</title>
+    <url>/mqzzzz.github.io/post/7a6a6b5a.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
       </tags>
   </entry>
 </search>
