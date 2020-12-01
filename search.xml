@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo新建博文</title>
-    <url>/post/884863d2.html</url>
-    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
-
-<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
-
-<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C#调用pyd</title>
     <url>/post/296ae744.html</url>
     <content><![CDATA[<p>转自: <a href="https://www.cnblogs.com/degc/p/13995247.html">C#调用pyd - 人类的实例 - 博客园 (cnblogs.com)</a></p>
@@ -65,6 +42,29 @@
       </categories>
       <tags>
         <tag>c#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo新建博文</title>
+    <url>/post/884863d2.html</url>
+    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
+
+<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
+
+<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -353,17 +353,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/post/ec878511.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>测试文章</title>
     <url>/post/7a6a6b5a.html</url>
     <content><![CDATA[]]></content>
@@ -372,6 +361,17 @@
       </categories>
       <tags>
         <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/post/ec878511.html</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
 </search>
