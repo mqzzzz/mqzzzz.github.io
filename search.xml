@@ -45,6 +45,25 @@
       </tags>
   </entry>
   <entry>
+    <title>IdentityServer4脱坑记录</title>
+    <url>/mqzzzz.github.io/post/31c3f66a.html</url>
+    <content><![CDATA[<p>由于是老项目升级.net5比较费劲，又需要加入ids，过程比较曲折</p>
+<p>终归还是配置问题</p>
+<p>V4版本需要设置以下属性才能兼容.net framework webapi</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitStaticAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>V3版本需要设置一下属性才能兼容.net framework webapi</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitLegacyResourceAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>IdentityServer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo新建博文</title>
     <url>/mqzzzz.github.io/post/884863d2.html</url>
     <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
@@ -65,25 +84,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IdentityServer4脱坑记录</title>
-    <url>/mqzzzz.github.io/post/31c3f66a.html</url>
-    <content><![CDATA[<p>由于是老项目升级.net5比较费劲，又需要加入ids，过程比较曲折</p>
-<p>终归还是配置问题</p>
-<p>V4版本需要设置以下属性才能兼容.net framework webapi</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitStaticAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>V3版本需要设置一下属性才能兼容.net framework webapi</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">options.EmitLegacyResourceAudienceClaim = <span class="literal">true</span></span><br><span class="line">options.AccessTokenJwtType = <span class="string">&quot;JWT&quot;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>IdentityServer</tag>
       </tags>
   </entry>
   <entry>
