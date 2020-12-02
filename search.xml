@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo新建博文</title>
-    <url>/post/884863d2.html</url>
-    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
-
-<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
-
-<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C#调用pyd</title>
     <url>/post/296ae744.html</url>
     <content><![CDATA[<p>python打包成pyd在本篇博客不多叙述，请读者自行百度，本篇博客主要讲解在C#中如何调用pyd以及遇到的一些问题如何解决。</p>
@@ -68,6 +45,29 @@
       </categories>
       <tags>
         <tag>c#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo新建博文</title>
+    <url>/post/884863d2.html</url>
+    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
+
+<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
+
+<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -357,6 +357,42 @@
       </tags>
   </entry>
   <entry>
+    <title>Windows Terminal实用设置和插件</title>
+    <url>/post/ec878512.html</url>
+    <content><![CDATA[<h4 id="Tab自动补全"><a href="#Tab自动补全" class="headerlink" title="Tab自动补全"></a>Tab自动补全</h4><p>首先，在<code>PowerShell</code>输入<code>notepad $PROFILE</code>打开自定义<code>profile</code>文件</p>
+<p>添加</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-PSReadlineKeyHandler</span> <span class="literal">-Key</span> Tab <span class="literal">-Function</span> MenuComplete</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义方程LSC，数列形式展示文件"><a href="#自定义方程LSC，数列形式展示文件" class="headerlink" title="自定义方程LSC，数列形式展示文件"></a>自定义方程LSC，数列形式展示文件</h4><p><code>$PROFILE</code>中添加</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lsc</span> </span>&#123;</span><br><span class="line">    Param ([int]$c = <span class="number">5</span>)</span><br><span class="line">    ls | Format-Wide -Column $c -Property Name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装PoShFuck"><a href="#安装PoShFuck" class="headerlink" title="安装PoShFuck"></a>安装PoShFuck</h4><p>安装指令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> RemoteSigned</span><br><span class="line"></span><br><span class="line"><span class="built_in">iex</span> ((<span class="built_in">new-object</span> net.webclient).DownloadString(<span class="string">&#x27;https://raw.githubusercontent.com/mattparkes/PoShFuck/master/Install-TheFucker.ps1&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>打开<code>$PROFILE</code>输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module PoShFuck</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装fzf"><a href="#安装fzf" class="headerlink" title="安装fzf"></a>安装fzf</h4><p>首先安装<code>fzf</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">choco install fzf</span><br></pre></td></tr></table></figure>
+
+<p>安装Powershell的fzf容器：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Install-Module PSFzf</span><br></pre></td></tr></table></figure>
+
+<p><code>$PROFILE</code>中禁用默认按键：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Remove-PSReadlineKeyHandler &#39;Ctrl+r&#39;</span><br></pre></td></tr></table></figure>
+
+<p><code>$PROFILE</code>中启用PSFzf:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module PSFzf</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置完毕后Profile总览"><a href="#设置完毕后Profile总览" class="headerlink" title="设置完毕后Profile总览"></a>设置完毕后Profile总览</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Disable default keys</span><br><span class="line">Remove-PSReadlineKeyHandler &#39;Ctrl+r&#39;</span><br><span class="line"></span><br><span class="line"># Import Modules</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module PSFzf</span><br><span class="line">Import-Module PoShFuck</span><br><span class="line"></span><br><span class="line"># Set Theme</span><br><span class="line">Set-Theme Paradox</span><br><span class="line"></span><br><span class="line"># Set MenuComplete</span><br><span class="line">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</span><br><span class="line"></span><br><span class="line"># Alias Command 可以创建你自己喜欢的别名</span><br><span class="line">Set-Alias -Name n -Value nvim</span><br><span class="line"></span><br><span class="line"># Alias Software 可以创建你自己喜欢的别名</span><br><span class="line">Set-Alias -Name vscode -Value &quot;C:\Users\langc\AppData\Local\Programs\Microsoft VS Code\Code.exe&quot;</span><br><span class="line"></span><br><span class="line"># Customized Functions</span><br><span class="line">function lsc &#123;</span><br><span class="line">   Param ([int]$c &#x3D; 5)</span><br><span class="line">   ls | Format-Wide -Column $c -Property Name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows Terminal 终极美化</title>
     <url>/post/ec878511.html</url>
     <content><![CDATA[<h4 id="安装-Window-Terminal"><a href="#安装-Window-Terminal" class="headerlink" title="安装 Window Terminal"></a>安装 Window Terminal</h4><p>有两种安装方式，这个要自行选择</p>
@@ -485,42 +521,6 @@
 <li>在(资源管理器)地址栏输入wt 回车</li>
 </ol>
 ]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows Terminal实用设置和插件</title>
-    <url>/post/ec878512.html</url>
-    <content><![CDATA[<h4 id="Tab自动补全"><a href="#Tab自动补全" class="headerlink" title="Tab自动补全"></a>Tab自动补全</h4><p>首先，在<code>PowerShell</code>输入<code>notepad $PROFILE</code>打开自定义<code>profile</code>文件</p>
-<p>添加</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-PSReadlineKeyHandler</span> <span class="literal">-Key</span> Tab <span class="literal">-Function</span> MenuComplete</span><br></pre></td></tr></table></figure>
-
-<h4 id="自定义方程LSC，数列形式展示文件"><a href="#自定义方程LSC，数列形式展示文件" class="headerlink" title="自定义方程LSC，数列形式展示文件"></a>自定义方程LSC，数列形式展示文件</h4><p><code>$PROFILE</code>中添加</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lsc</span> </span>&#123;</span><br><span class="line">    Param ([int]$c = <span class="number">5</span>)</span><br><span class="line">    ls | Format-Wide -Column $c -Property Name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装PoShFuck"><a href="#安装PoShFuck" class="headerlink" title="安装PoShFuck"></a>安装PoShFuck</h4><p>安装指令</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> RemoteSigned</span><br><span class="line"></span><br><span class="line"><span class="built_in">iex</span> ((<span class="built_in">new-object</span> net.webclient).DownloadString(<span class="string">&#x27;https://raw.githubusercontent.com/mattparkes/PoShFuck/master/Install-TheFucker.ps1&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>打开<code>$PROFILE</code>输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module PoShFuck</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装fzf"><a href="#安装fzf" class="headerlink" title="安装fzf"></a>安装fzf</h4><p>首先安装<code>fzf</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">choco install fzf</span><br></pre></td></tr></table></figure>
-
-<p>安装Powershell的fzf容器：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Install-Module PSFzf</span><br></pre></td></tr></table></figure>
-
-<p><code>$PROFILE</code>中禁用默认按键：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Remove-PSReadlineKeyHandler &#39;Ctrl+r&#39;</span><br></pre></td></tr></table></figure>
-
-<p><code>$PROFILE</code>中启用PSFzf:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module PSFzf</span><br></pre></td></tr></table></figure>
-
-<h4 id="设置完毕后Profile总览"><a href="#设置完毕后Profile总览" class="headerlink" title="设置完毕后Profile总览"></a>设置完毕后Profile总览</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Disable default keys</span><br><span class="line">Remove-PSReadlineKeyHandler &#39;Ctrl+r&#39;</span><br><span class="line"></span><br><span class="line"># Import Modules</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module PSFzf</span><br><span class="line">Import-Module PoShFuck</span><br><span class="line"></span><br><span class="line"># Set Theme</span><br><span class="line">Set-Theme Paradox</span><br><span class="line"></span><br><span class="line"># Set MenuComplete</span><br><span class="line">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete</span><br><span class="line"></span><br><span class="line"># Alias Command 可以创建你自己喜欢的别名</span><br><span class="line">Set-Alias -Name n -Value nvim</span><br><span class="line"></span><br><span class="line"># Alias Software 可以创建你自己喜欢的别名</span><br><span class="line">Set-Alias -Name vscode -Value &quot;C:\Users\langc\AppData\Local\Programs\Microsoft VS Code\Code.exe&quot;</span><br><span class="line"></span><br><span class="line"># Customized Functions</span><br><span class="line">function lsc &#123;</span><br><span class="line">   Param ([int]$c &#x3D; 5)</span><br><span class="line">   ls | Format-Wide -Column $c -Property Name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>其他</category>
       </categories>
