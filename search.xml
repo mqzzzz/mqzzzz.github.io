@@ -45,29 +45,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo新建博文</title>
-    <url>/post/884863d2.html</url>
-    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
-
-<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
-
-<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IdentityServer4脱坑记录</title>
     <url>/post/31c3f66a.html</url>
     <content><![CDATA[<p>由于是老项目升级.net5比较费劲，又需要加入ids，过程比较曲折</p>
@@ -84,142 +61,6 @@
       </categories>
       <tags>
         <tag>IdentityServer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/post/ec878511.html</url>
-    <content><![CDATA[<h4 id="安装-Window-Terminal"><a href="#安装-Window-Terminal" class="headerlink" title="安装 Window Terminal"></a>安装 Window Terminal</h4><p>有两种安装方式，这个要自行选择</p>
-<h5 id="git-安装"><a href="#git-安装" class="headerlink" title="git 安装"></a>git 安装</h5><p><del>前往 windows terminal 的地址下载，再使用vs2019 进行编译使用。我是拉了关天，没拉下来，放弃了。</del></p>
-<h5 id="商店安装"><a href="#商店安装" class="headerlink" title="商店安装"></a>商店安装</h5><p>在微软商店里搜windows terminal，安装即可。</p>
-<ol>
-<li><p>商店打不开的，自行解决，直接了当的方式就是升级系统到最新版本，重启。</p>
-</li>
-<li><p>提示当前所在的区域不支持的话 ： </p>
-<blockquote>
-<p>登录账号的进账号把自己所在区域地址改成美国，然后把系统时间设置成美国。重启</p>
-</blockquote>
-</li>
-</ol>
-<p>正常情况下，你会安装成功的。 可以继续往下看了，先放一张图：   </p>
-<p><img data-src="https://res.aimon.cc/img/20201201201321.jpeg" alt="钢铁侠"></p>
-<p>下面开工：</p>
-<h4 id="配置解释"><a href="#配置解释" class="headerlink" title="配置解释"></a>配置解释</h4><p>用到的就以下这些了，其他用不着的就不写了。 </p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      &quot;acrylicOpacity&quot;: 0.1, //背景透明度(0-1)</span><br><span class="line">      &quot;useAcrylic&quot;: true, // 启用毛玻璃</span><br><span class="line">      &quot;backgroundImage&quot;: &quot;D:/User/chuchur/OneDrive/图片/stack.jpg&quot;, //背景图片</span><br><span class="line">      &quot;backgroundImageOpacity&quot;: 0.1, //图片透明度（0-1）</span><br><span class="line">      &quot;experimental.retroTerminalEffect&quot;: true, //复古的CRT 效果</span><br><span class="line">      &quot;backgroundImageStretchMode&quot;: &quot;uniformToFill&quot;, //填充模式</span><br><span class="line">      &quot;icon&quot;: &quot;ms-appx:///ProfileIcons/&#123;9acb9455-ca41-5af7-950f-6bca1bc9722f&#125;.png&quot;, //图标</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 12, //文字大小</span><br><span class="line">      &quot;fontWeight&quot;: &quot;think&quot;, //文字宽度，可设置加粗</span><br><span class="line">      &quot;colorScheme&quot;: &quot;Solarized Dark&quot;, //主题名字</span><br><span class="line">      &quot;cursorColor&quot;: &quot;#FFFFFF&quot;, //光标颜色</span><br><span class="line">      &quot;cursorShape&quot;: &quot;bar&quot;, //光标形状</span><br><span class="line">      &quot;startingDirectory&quot;: &quot;D://Projects//&quot;, //起始目录</span><br><span class="line">      &quot;antialiasingMode&quot;: &quot;cleartype&quot; //消除文字锯齿</span><br><span class="line">    &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="复古的CRT-效果"><a href="#复古的CRT-效果" class="headerlink" title="复古的CRT 效果"></a>复古的CRT 效果</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;experimental.retroTerminalEffect&quot;: true</span><br></pre></td></tr></table></figure>
-
-<p>先说说复古模式，这个设计初衷是好的，我怎么觉得是眼瞎模式呢，本来300瓦的近视，开启这种模式之后，瞬间到500瓦了。 i7十代的 16G的配置，开启这种模式之后，卡成狗。很烧性能，但是装个逼什么的还是可以的，真正用起来，不建议使用，可能还在摸索阶段吧，Bug 多。放个图：</p>
-<p><img data-src="https://res.aimon.cc/img/20201201201602.jpeg" alt="Window Terminal CRT"></p>
-<blockquote>
-<p>装逼专用配置😄</p>
-</blockquote>
-<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><p>先安装Sarasa[更纱黑体] 字体 ，一会要使用的是Sarasa Term SC, 链接：点击 github 下载更纱黑体 嫌弃github慢的，右键这里下载在安装包找到Sarasa Term系列全部安装 安装完之后，在profiles.json文件 配置上字体 </p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      ....</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 14, //文字大小</span><br><span class="line">      ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h4><p>因为执行Install-Module会报错以下信息：因为在此系统上禁止运行脚本。有关详细信息，先以管理员权限运行windows terminal，然后执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment">##允许执行脚本</span></span><br><span class="line"><span class="built_in">set-executionpolicy</span> remotesigned</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> [<span class="type">moudel</span> <span class="type">name</span>] <span class="literal">-Scope</span> CurrentUser  <span class="comment">#只为当前用户安装</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>Post-Git和Git-Aliases可以实现类似oh-my-zsh一样的Git增强(命令别名和显示分支等信息) oh-my-posh提供 了非常漂亮的主题。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Install-Module git-aliases -AllowClobber</span><br><span class="line">Install-Module posh-git</span><br><span class="line">Install-Module oh-my-posh #</span><br><span class="line">Install-Module DirColors  #让 ls (Get-ChildItem) 像 Unix 系终端一样具有多彩色</span><br></pre></td></tr></table></figure>
-
-<p>oh-my-posh提供了10款漂亮的主题供我们选择。</p>
-<p> Agnoster,Avit,Darkblood,Fish,Honukai,Paradox,PowerLine,robbyrussell,Sorin,tehrob </p>
-<p>可以使用Set-Theme [主题名]配置主题</p>
-<h5 id="加载模块和设置主题"><a href="#加载模块和设置主题" class="headerlink" title="加载模块和设置主题"></a>加载模块和设置主题</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> DirColors</span><br><span class="line"><span class="built_in">Import-Module</span> posh<span class="literal">-git</span></span><br><span class="line"><span class="built_in">Import-Module</span> <span class="built_in">oh</span><span class="literal">-my</span><span class="literal">-posh</span></span><br><span class="line"><span class="built_in">Import-Module</span> git<span class="literal">-aliases</span> <span class="literal">-DisableNameChecking</span></span><br><span class="line"><span class="built_in">Set-Theme</span> PowerLine</span><br></pre></td></tr></table></figure>
-
-<h4 id="保存配置，永久生效"><a href="#保存配置，永久生效" class="headerlink" title="保存配置，永久生效"></a>保存配置，永久生效</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PROFILE    # 输入此命令，$符号也要一起，查看配置文件的全路径</span><br></pre></td></tr></table></figure>
-
-<p>正常情况 ，你会看到 C:\Users[your name]\Documents\WindowsPowerShell\Microsoft. PowerShell_profile.ps1 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">code $PROFILE  # 输入此命令,使用 vscode 打开(或创建)配置文件, notepad 也可以</span><br></pre></td></tr></table></figure>
-
-<p>在打开的Microsoft.PowerShell_profile.ps1, 保存以下配置 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module DirColors</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module git-aliases -DisableNameChecking</span><br><span class="line">Set-Theme PowerLine</span><br></pre></td></tr></table></figure>
-
-<h4 id="主题颜色美化"><a href="#主题颜色美化" class="headerlink" title="主题颜色美化"></a>主题颜色美化</h4><h5 id="使用官方的colortool"><a href="#使用官方的colortool" class="headerlink" title="使用官方的colortool"></a>使用官方的colortool</h5><p>安装 colortool </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scoop install colortool</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>scoop 安装请参见windows 10 包管理</p>
-</blockquote>
-<p>colortool 的相关命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c --current：打印当前应用方案的颜色表</span><br><span class="line">-q --quiet：使用后不要打印颜色表</span><br><span class="line">-e --errors：在控制台上报告方案分析错误</span><br><span class="line">-d --defaults：仅将方案应用于注册表中的默认值</span><br><span class="line">-b --both：将方案同时应用于当前控制台和默认控制台。</span><br><span class="line">-x --xterm：使用VT序列设置颜色。用于设置WSL中的颜色。仅适用于Windows版本&gt;=17048。</span><br><span class="line">-s --schemes：显示所有可用的方案</span><br><span class="line">-l --location：显示schemes目录的完整路径</span><br><span class="line">-v --version：显示版本号</span><br><span class="line">-o --output&lt;filename&gt;：将当前颜色表输出到文件（以.ini格式）</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>-是缩写，–是全写 </p>
-</blockquote>
-<p>使用colortool -s看到 也提供了 8 套配色方案:</p>
-<ul>
-<li>campbell-legacy.ini </li>
-<li>campbell.ini </li>
-<li>cmd-legacy.ini </li>
-<li>deuteranopia.itermcolors </li>
-<li>OneHalfDark.itermcolors </li>
-<li>OneHalfLight.itermcolors </li>
-<li>solarized_dark.itermcolors </li>
-<li>solarized_light.itermcolors </li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">colortool -b OneHalfDark.itermcolors</span><br></pre></td></tr></table></figure>
-
-<p>将OneHalfDark.itermcolors主题应用到当前控制台 ,Mac使用惯了， 你也可以来一波自定义的方案</p>
-<h5 id="手动配色"><a href="#手动配色" class="headerlink" title="手动配色"></a>手动配色</h5><p>就是用iterm2的主题颜色吧，人家都已经写好了。直接使用就是了 打开 iTerm2-Color-Schemes, 找到配色的.json文件，把里面的配色复制到schemes下面就可以了。我这里选了两款Solarized的主题，</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;:&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">&quot;schemes&quot;:[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Dark&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#002831&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#d11c24&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#738a05&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#a57706&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2176c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#c61c6f&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#259286&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#eae3cb&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#bd3613&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#536870&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#708284&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#5956ba&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#819090&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#fcf4dc&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#001e27&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#708284&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Darcula&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#3d3f41&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>到此美化就收工了。</p>
-<h4 id="分屏-多窗格-缩放"><a href="#分屏-多窗格-缩放" class="headerlink" title="分屏/ 多窗格 / 缩放"></a>分屏/ 多窗格 / 缩放</h4><p>他可以像 Item2 一样 在同一 Tab 下 分屏，如下图： </p>
-<p><img data-src="https://res.aimon.cc/img/20201201221316.jpeg" alt="多窗格"></p>
-<p>分屏快捷键如下： </p>
-<p>水平分屏：Alt + Shift + 减号 </p>
-<p>垂直分屏：Alt + Shift + 加号 </p>
-<p>切换聚焦的分屏视图：alt + (left/right/up/down) </p>
-<p>调节分屏的窗口大小：alt + shift + (left/right/up/down) </p>
-<p>缩放当前视图：Ctrl+ 加号/减号 （或者 Ctrl + 鼠标滚轮） </p>
-<blockquote>
-<p>那我不想分屏，我要删掉一个怎么办？ 这个问题问的好，直接输入exit即可退出分屏 著作权归作者所有。</p>
-</blockquote>
-<h4 id="PowerShell-的更新"><a href="#PowerShell-的更新" class="headerlink" title="PowerShell 的更新"></a>PowerShell 的更新</h4><p>自带的 PS 版本　是 5.0 的 ，可以升级到更高版本， 目前稳定版本为 7.x </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PSVersionTable.PSVersion.Major   #查看Powershell版本</span><br><span class="line">$PSVersionTable.CLRVersion.Major  #查看.NET Framework版本</span><br></pre></td></tr></table></figure>
-
-<p>在<a href="https://github.com/PowerShell/PowerShell/releases">这里</a>找到**x64.msi,下载安装即可。</p>
-<h4 id="关于-ssh-的配置"><a href="#关于-ssh-的配置" class="headerlink" title="关于 ssh 的配置"></a>关于 ssh 的配置</h4><h5 id="新建-config-文件"><a href="#新建-config-文件" class="headerlink" title="新建 config 文件"></a>新建 config 文件</h5><p>在.ssh目录（就是你的.pub 默认生成位置, 通常是C:\Users[your name].ssh），新建一个config文件，没有后缀，内容：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host          aliyun</span><br><span class="line">HostName      192.168.1.1</span><br><span class="line">Port          22</span><br><span class="line">User          root</span><br><span class="line">IdentityFile  C:&#x2F;Users&#x2F;[your name]&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>IdentityFile 是 ssh 的 key，你要自己生成。</p>
-<h5 id="配置-profiles-json"><a href="#配置-profiles-json" class="headerlink" title="配置 profiles.json"></a>配置 profiles.json</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;9a138488-58fc-4a7a-b3c2-3af9ba5bc7bb&#125;&quot;</span>, <span class="comment">//这个你要自己生成</span></span><br><span class="line">      <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;ssh aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;aliyun-Linux&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.guidgen.com/">在这里可以在线生成 GUID</a> </p>
-<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>直接执行： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh aliyun</span><br></pre></td></tr></table></figure>
-
-<p>这样就直接登录阿里云了。</p>
-<h4 id="关于-bash-的配置"><a href="#关于-bash-的配置" class="headerlink" title="关于 bash 的配置"></a>关于 bash 的配置</h4><h5 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h5><p>依次打开–控制面板–系统和安全—系统—-高级系统设置, 找不到就 输命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">control system</span><br></pre></td></tr></table></figure>
-
-<p>系统属性—高级—环境变量—系统变量，找到Path变量，编辑，新建一个，把git的bin路径加进去，(如D:\Program files\git\bin)，一路保存就可以了。</p>
-<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// Make changes here to the powershell.exe profile</span></span><br><span class="line">        <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6109&#125;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;bash.exe&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;closeOnExit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;fontFace&quot;</span>: <span class="string">&quot;Sarasa Term SC&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;hidden&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;snapOnInput&quot;</span>: <span class="literal">true</span>, <span class="comment">// 捕捉输入</span></span><br><span class="line">        <span class="comment">// &quot;startingDirectory&quot;: &quot;%USERPROFILE%&quot;</span></span><br><span class="line">        <span class="attr">&quot;startingDirectory&quot;</span>: <span class="string">&quot;d://Projects//dobo&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上就配置完成了，你新建 bash 标签。就可以使用 bash 了。</p>
-<h4 id="鼠标右键菜单的配置"><a href="#鼠标右键菜单的配置" class="headerlink" title="鼠标右键菜单的配置"></a>鼠标右键菜单的配置</h4><p>这个需要改注册表来完成 新建一个文件wt.reg，内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]</span><br><span class="line">@=<span class="string">&quot;贾维斯,来个命令窗口&quot;</span></span><br><span class="line"><span class="string">&quot;Icon&quot;</span>=<span class="string">&quot;D:\\User\\chuchur\\OneDrive\\图片\\wt.ico&quot;</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]</span><br><span class="line">@=<span class="string">&quot;C:\\Users\\chuchur\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>第一个@ 是菜单项的名字，下面那个Icon 就是菜单项的图标，也可以不要，第二个@就是点击要执行的程序。 </p>
-<blockquote>
-<p>从商店安装的叫wt.exe， 自行编译的叫wtd.exe。 这个还是得区分下</p>
-</blockquote>
-<p>保存，然后双击执行wt.reg，导入注册表，就完事了。</p>
-<h4 id="快捷执行方式"><a href="#快捷执行方式" class="headerlink" title="快捷执行方式"></a>快捷执行方式</h4><ol>
-<li>写在以上，搞定鼠标右键 </li>
-<li>Win+R 输入wt ，回车 </li>
-<li>在(资源管理器)地址栏输入wt 回车</li>
-</ol>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -486,6 +327,165 @@
       </categories>
       <tags>
         <tag>typora</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo新建博文</title>
+    <url>/post/884863d2.html</url>
+    <content><![CDATA[<h4 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h4><p>创建一篇新的文章，输入如下命令，其中title替换成你的文章标题</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new title</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> hexo new post title</span><br></pre></td></tr></table></figure>
+
+<h4 id="实际运行"><a href="#实际运行" class="headerlink" title="实际运行"></a>实际运行</h4><p>可以看到创建的文件在/source/_posts路径下</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">D:\hexo\blog&gt;hexo new 我的第一篇博文 </span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span>-我的第一篇博文.md</span><br><span class="line">D:\hexo\blog&gt;hexo new post <span class="string">&quot;My Second Blog&quot;</span></span><br><span class="line">INFO  Created: D:\hexo\blog\source\_posts\<span class="number">2019</span><span class="literal">-06</span><span class="literal">-24</span><span class="literal">-My</span><span class="literal">-Second</span><span class="literal">-Blog</span>.md</span><br></pre></td></tr></table></figure>
+
+<p>打开创建的MarkDown文件，默认内容如下，我们可以在新建的文件里用MarkDown语法编辑文章</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">--- </span><br><span class="line">title: 我的第一篇博文 </span><br><span class="line">date: 2019-06-24 20:05:55 </span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/post/ec878511.html</url>
+    <content><![CDATA[<h4 id="安装-Window-Terminal"><a href="#安装-Window-Terminal" class="headerlink" title="安装 Window Terminal"></a>安装 Window Terminal</h4><p>有两种安装方式，这个要自行选择</p>
+<h5 id="git-安装"><a href="#git-安装" class="headerlink" title="git 安装"></a>git 安装</h5><p><del>前往 windows terminal 的地址下载，再使用vs2019 进行编译使用。我是拉了关天，没拉下来，放弃了。</del></p>
+<h5 id="商店安装"><a href="#商店安装" class="headerlink" title="商店安装"></a>商店安装</h5><p>在微软商店里搜windows terminal，安装即可。</p>
+<ol>
+<li><p>商店打不开的，自行解决，直接了当的方式就是升级系统到最新版本，重启。</p>
+</li>
+<li><p>提示当前所在的区域不支持的话 ： </p>
+<blockquote>
+<p>登录账号的进账号把自己所在区域地址改成美国，然后把系统时间设置成美国。重启</p>
+</blockquote>
+</li>
+</ol>
+<p>正常情况下，你会安装成功的。 可以继续往下看了，先放一张图：   </p>
+<p><img data-src="https://res.aimon.cc/img/20201201201321.jpeg" alt="钢铁侠"></p>
+<p>下面开工：</p>
+<h4 id="配置解释"><a href="#配置解释" class="headerlink" title="配置解释"></a>配置解释</h4><p>用到的就以下这些了，其他用不着的就不写了。 </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      &quot;acrylicOpacity&quot;: 0.1, //背景透明度(0-1)</span><br><span class="line">      &quot;useAcrylic&quot;: true, // 启用毛玻璃</span><br><span class="line">      &quot;backgroundImage&quot;: &quot;D:/User/chuchur/OneDrive/图片/stack.jpg&quot;, //背景图片</span><br><span class="line">      &quot;backgroundImageOpacity&quot;: 0.1, //图片透明度（0-1）</span><br><span class="line">      &quot;experimental.retroTerminalEffect&quot;: true, //复古的CRT 效果</span><br><span class="line">      &quot;backgroundImageStretchMode&quot;: &quot;uniformToFill&quot;, //填充模式</span><br><span class="line">      &quot;icon&quot;: &quot;ms-appx:///ProfileIcons/&#123;9acb9455-ca41-5af7-950f-6bca1bc9722f&#125;.png&quot;, //图标</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 12, //文字大小</span><br><span class="line">      &quot;fontWeight&quot;: &quot;think&quot;, //文字宽度，可设置加粗</span><br><span class="line">      &quot;colorScheme&quot;: &quot;Solarized Dark&quot;, //主题名字</span><br><span class="line">      &quot;cursorColor&quot;: &quot;#FFFFFF&quot;, //光标颜色</span><br><span class="line">      &quot;cursorShape&quot;: &quot;bar&quot;, //光标形状</span><br><span class="line">      &quot;startingDirectory&quot;: &quot;D://Projects//&quot;, //起始目录</span><br><span class="line">      &quot;antialiasingMode&quot;: &quot;cleartype&quot; //消除文字锯齿</span><br><span class="line">    &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="复古的CRT-效果"><a href="#复古的CRT-效果" class="headerlink" title="复古的CRT 效果"></a>复古的CRT 效果</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;experimental.retroTerminalEffect&quot;: true</span><br></pre></td></tr></table></figure>
+
+<p>先说说复古模式，这个设计初衷是好的，我怎么觉得是眼瞎模式呢，本来300瓦的近视，开启这种模式之后，瞬间到500瓦了。 i7十代的 16G的配置，开启这种模式之后，卡成狗。很烧性能，但是装个逼什么的还是可以的，真正用起来，不建议使用，可能还在摸索阶段吧，Bug 多。放个图：</p>
+<p><img data-src="https://res.aimon.cc/img/20201201201602.jpeg" alt="Window Terminal CRT"></p>
+<blockquote>
+<p>装逼专用配置😄</p>
+</blockquote>
+<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><p>先安装Sarasa[更纱黑体] 字体 ，一会要使用的是Sarasa Term SC, 链接：点击 github 下载更纱黑体 嫌弃github慢的，右键这里下载在安装包找到Sarasa Term系列全部安装 安装完之后，在profiles.json文件 配置上字体 </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      ....</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 14, //文字大小</span><br><span class="line">      ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h4><p>因为执行Install-Module会报错以下信息：因为在此系统上禁止运行脚本。有关详细信息，先以管理员权限运行windows terminal，然后执行以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment">##允许执行脚本</span></span><br><span class="line"><span class="built_in">set-executionpolicy</span> remotesigned</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> [<span class="type">moudel</span> <span class="type">name</span>] <span class="literal">-Scope</span> CurrentUser  <span class="comment">#只为当前用户安装</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>Post-Git和Git-Aliases可以实现类似oh-my-zsh一样的Git增强(命令别名和显示分支等信息) oh-my-posh提供 了非常漂亮的主题。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Install-Module git-aliases -AllowClobber</span><br><span class="line">Install-Module posh-git</span><br><span class="line">Install-Module oh-my-posh #</span><br><span class="line">Install-Module DirColors  #让 ls (Get-ChildItem) 像 Unix 系终端一样具有多彩色</span><br></pre></td></tr></table></figure>
+
+<p>oh-my-posh提供了10款漂亮的主题供我们选择。</p>
+<p> Agnoster,Avit,Darkblood,Fish,Honukai,Paradox,PowerLine,robbyrussell,Sorin,tehrob </p>
+<p>可以使用Set-Theme [主题名]配置主题</p>
+<h5 id="加载模块和设置主题"><a href="#加载模块和设置主题" class="headerlink" title="加载模块和设置主题"></a>加载模块和设置主题</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> DirColors</span><br><span class="line"><span class="built_in">Import-Module</span> posh<span class="literal">-git</span></span><br><span class="line"><span class="built_in">Import-Module</span> <span class="built_in">oh</span><span class="literal">-my</span><span class="literal">-posh</span></span><br><span class="line"><span class="built_in">Import-Module</span> git<span class="literal">-aliases</span> <span class="literal">-DisableNameChecking</span></span><br><span class="line"><span class="built_in">Set-Theme</span> PowerLine</span><br></pre></td></tr></table></figure>
+
+<h4 id="保存配置，永久生效"><a href="#保存配置，永久生效" class="headerlink" title="保存配置，永久生效"></a>保存配置，永久生效</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PROFILE    # 输入此命令，$符号也要一起，查看配置文件的全路径</span><br></pre></td></tr></table></figure>
+
+<p>正常情况 ，你会看到 C:\Users[your name]\Documents\WindowsPowerShell\Microsoft. PowerShell_profile.ps1 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">code $PROFILE  # 输入此命令,使用 vscode 打开(或创建)配置文件, notepad 也可以</span><br></pre></td></tr></table></figure>
+
+<p>在打开的Microsoft.PowerShell_profile.ps1, 保存以下配置 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module DirColors</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module git-aliases -DisableNameChecking</span><br><span class="line">Set-Theme PowerLine</span><br></pre></td></tr></table></figure>
+
+<h4 id="主题颜色美化"><a href="#主题颜色美化" class="headerlink" title="主题颜色美化"></a>主题颜色美化</h4><h5 id="使用官方的colortool"><a href="#使用官方的colortool" class="headerlink" title="使用官方的colortool"></a>使用官方的colortool</h5><p>安装 colortool </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scoop install colortool</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>scoop 安装请参见windows 10 包管理</p>
+</blockquote>
+<p>colortool 的相关命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c --current：打印当前应用方案的颜色表</span><br><span class="line">-q --quiet：使用后不要打印颜色表</span><br><span class="line">-e --errors：在控制台上报告方案分析错误</span><br><span class="line">-d --defaults：仅将方案应用于注册表中的默认值</span><br><span class="line">-b --both：将方案同时应用于当前控制台和默认控制台。</span><br><span class="line">-x --xterm：使用VT序列设置颜色。用于设置WSL中的颜色。仅适用于Windows版本&gt;=17048。</span><br><span class="line">-s --schemes：显示所有可用的方案</span><br><span class="line">-l --location：显示schemes目录的完整路径</span><br><span class="line">-v --version：显示版本号</span><br><span class="line">-o --output&lt;filename&gt;：将当前颜色表输出到文件（以.ini格式）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-是缩写，–是全写 </p>
+</blockquote>
+<p>使用colortool -s看到 也提供了 8 套配色方案:</p>
+<ul>
+<li>campbell-legacy.ini </li>
+<li>campbell.ini </li>
+<li>cmd-legacy.ini </li>
+<li>deuteranopia.itermcolors </li>
+<li>OneHalfDark.itermcolors </li>
+<li>OneHalfLight.itermcolors </li>
+<li>solarized_dark.itermcolors </li>
+<li>solarized_light.itermcolors </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">colortool -b OneHalfDark.itermcolors</span><br></pre></td></tr></table></figure>
+
+<p>将OneHalfDark.itermcolors主题应用到当前控制台 ,Mac使用惯了， 你也可以来一波自定义的方案</p>
+<h5 id="手动配色"><a href="#手动配色" class="headerlink" title="手动配色"></a>手动配色</h5><p>就是用iterm2的主题颜色吧，人家都已经写好了。直接使用就是了 打开 iTerm2-Color-Schemes, 找到配色的.json文件，把里面的配色复制到schemes下面就可以了。我这里选了两款Solarized的主题，</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;:&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">&quot;schemes&quot;:[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Dark&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#002831&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#d11c24&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#738a05&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#a57706&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2176c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#c61c6f&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#259286&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#eae3cb&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#bd3613&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#536870&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#708284&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#5956ba&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#819090&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#fcf4dc&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#001e27&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#708284&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Darcula&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#3d3f41&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>到此美化就收工了。</p>
+<h4 id="分屏-多窗格-缩放"><a href="#分屏-多窗格-缩放" class="headerlink" title="分屏/ 多窗格 / 缩放"></a>分屏/ 多窗格 / 缩放</h4><p>他可以像 Item2 一样 在同一 Tab 下 分屏，如下图： </p>
+<p><img data-src="https://res.aimon.cc/img/20201201221316.jpeg" alt="多窗格"></p>
+<p>分屏快捷键如下： </p>
+<p>水平分屏：Alt + Shift + 减号 </p>
+<p>垂直分屏：Alt + Shift + 加号 </p>
+<p>切换聚焦的分屏视图：alt + (left/right/up/down) </p>
+<p>调节分屏的窗口大小：alt + shift + (left/right/up/down) </p>
+<p>缩放当前视图：Ctrl+ 加号/减号 （或者 Ctrl + 鼠标滚轮） </p>
+<blockquote>
+<p>那我不想分屏，我要删掉一个怎么办？ 这个问题问的好，直接输入exit即可退出分屏 著作权归作者所有。</p>
+</blockquote>
+<h4 id="PowerShell-的更新"><a href="#PowerShell-的更新" class="headerlink" title="PowerShell 的更新"></a>PowerShell 的更新</h4><p>自带的 PS 版本　是 5.0 的 ，可以升级到更高版本， 目前稳定版本为 7.x </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PSVersionTable.PSVersion.Major   #查看Powershell版本</span><br><span class="line">$PSVersionTable.CLRVersion.Major  #查看.NET Framework版本</span><br></pre></td></tr></table></figure>
+
+<p>在<a href="https://github.com/PowerShell/PowerShell/releases">这里</a>找到**x64.msi,下载安装即可。</p>
+<h4 id="关于-ssh-的配置"><a href="#关于-ssh-的配置" class="headerlink" title="关于 ssh 的配置"></a>关于 ssh 的配置</h4><h5 id="新建-config-文件"><a href="#新建-config-文件" class="headerlink" title="新建 config 文件"></a>新建 config 文件</h5><p>在.ssh目录（就是你的.pub 默认生成位置, 通常是C:\Users[your name].ssh），新建一个config文件，没有后缀，内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host          aliyun</span><br><span class="line">HostName      192.168.1.1</span><br><span class="line">Port          22</span><br><span class="line">User          root</span><br><span class="line">IdentityFile  C:&#x2F;Users&#x2F;[your name]&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>IdentityFile 是 ssh 的 key，你要自己生成。</p>
+<h5 id="配置-profiles-json"><a href="#配置-profiles-json" class="headerlink" title="配置 profiles.json"></a>配置 profiles.json</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;9a138488-58fc-4a7a-b3c2-3af9ba5bc7bb&#125;&quot;</span>, <span class="comment">//这个你要自己生成</span></span><br><span class="line">      <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;ssh aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;aliyun-Linux&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.guidgen.com/">在这里可以在线生成 GUID</a> </p>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>直接执行： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh aliyun</span><br></pre></td></tr></table></figure>
+
+<p>这样就直接登录阿里云了。</p>
+<h4 id="关于-bash-的配置"><a href="#关于-bash-的配置" class="headerlink" title="关于 bash 的配置"></a>关于 bash 的配置</h4><h5 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h5><p>依次打开–控制面板–系统和安全—系统—-高级系统设置, 找不到就 输命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">control system</span><br></pre></td></tr></table></figure>
+
+<p>系统属性—高级—环境变量—系统变量，找到Path变量，编辑，新建一个，把git的bin路径加进去，(如D:\Program files\git\bin)，一路保存就可以了。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// Make changes here to the powershell.exe profile</span></span><br><span class="line">        <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6109&#125;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;bash.exe&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;closeOnExit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;fontFace&quot;</span>: <span class="string">&quot;Sarasa Term SC&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;hidden&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;snapOnInput&quot;</span>: <span class="literal">true</span>, <span class="comment">// 捕捉输入</span></span><br><span class="line">        <span class="comment">// &quot;startingDirectory&quot;: &quot;%USERPROFILE%&quot;</span></span><br><span class="line">        <span class="attr">&quot;startingDirectory&quot;</span>: <span class="string">&quot;d://Projects//dobo&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就配置完成了，你新建 bash 标签。就可以使用 bash 了。</p>
+<h4 id="鼠标右键菜单的配置"><a href="#鼠标右键菜单的配置" class="headerlink" title="鼠标右键菜单的配置"></a>鼠标右键菜单的配置</h4><p>这个需要改注册表来完成 新建一个文件wt.reg，内容如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]</span><br><span class="line">@=<span class="string">&quot;贾维斯,来个命令窗口&quot;</span></span><br><span class="line"><span class="string">&quot;Icon&quot;</span>=<span class="string">&quot;D:\\User\\chuchur\\OneDrive\\图片\\wt.ico&quot;</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]</span><br><span class="line">@=<span class="string">&quot;C:\\Users\\chuchur\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个@ 是菜单项的名字，下面那个Icon 就是菜单项的图标，也可以不要，第二个@就是点击要执行的程序。 </p>
+<blockquote>
+<p>从商店安装的叫wt.exe， 自行编译的叫wtd.exe。 这个还是得区分下</p>
+</blockquote>
+<p>保存，然后双击执行wt.reg，导入注册表，就完事了。</p>
+<h4 id="快捷执行方式"><a href="#快捷执行方式" class="headerlink" title="快捷执行方式"></a>快捷执行方式</h4><ol>
+<li>写在以上，搞定鼠标右键 </li>
+<li>Win+R 输入wt ，回车 </li>
+<li>在(资源管理器)地址栏输入wt 回车</li>
+</ol>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
