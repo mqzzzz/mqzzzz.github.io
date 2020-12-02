@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.aimon.cc","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"bounceInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="前言1.关于JWT的Token过期问题,到底设置多久过期？ (1).有的人设置过期时间很长，比如一个月，甚至更长，等到过期了退回登录页面,重新登录重新获取token，期间登录的时候也是重新获取token，然后过期时间又重置为了1个月。这样一旦token被人截取，就可能被人长期使用，如果你想禁止，只能修改token颁发的密钥，这样就会导致所有token都失效，显然不太可取。 (2).有的人设置比较短">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Asp.Net Core中JWT刷新Token解决方案">
+<meta property="og:url" content="https://www.aimon.cc/post/13860cc7.html">
+<meta property="og:site_name" content="六月的雨">
+<meta property="og:description" content="前言1.关于JWT的Token过期问题,到底设置多久过期？ (1).有的人设置过期时间很长，比如一个月，甚至更长，等到过期了退回登录页面,重新登录重新获取token，期间登录的时候也是重新获取token，然后过期时间又重置为了1个月。这样一旦token被人截取，就可能被人长期使用，如果你想禁止，只能修改token颁发的密钥，这样就会导致所有token都失效，显然不太可取。 (2).有的人设置比较短">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://res.aimon.cc/img/20201202143643.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201202143743.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201202143835.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201202143924.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201202143937.png">
+<meta property="article:published_time" content="2020-12-02T02:56:53.000Z">
+<meta property="article:modified_time" content="2020-12-02T06:43:58.108Z">
+<meta property="article:author" content="aimon">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.aimon.cc/img/20201202143643.png">
+
+
+<link rel="canonical" href="https://www.aimon.cc/post/13860cc7.html">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Asp.Net Core中JWT刷新Token解决方案 | 六月的雨</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">六月的雨</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">今天，是你余生的第一天</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-coding">
+
+    <a href="/categories/coding" rel="section"><i class="fa fa-code fa-fw"></i>编程</a>
+
+  </li>
+        <li class="menu-item menu-item-essay">
+
+    <a href="/categories/essay" rel="section"><i class="fa fa-bookmark fa-fw"></i>好文</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="aimon"
+      src="https://res.aimon.cc/img/avatar2.jpg">
+  <p class="site-author-name" itemprop="name">aimon</p>
+  <div class="site-description" itemprop="description">我喜欢三月的风、六月的雨、不落的太阳、最好的你</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mqzzzz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mqzzzz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:mqzzzz@qq.com" title="E-Mail → mailto:mqzzzz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.aimon.cc/post/13860cc7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://res.aimon.cc/img/avatar2.jpg">
+      <meta itemprop="name" content="aimon">
+      <meta itemprop="description" content="我喜欢三月的风、六月的雨、不落的太阳、最好的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六月的雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Asp.Net Core中JWT刷新Token解决方案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-02 10:56:53 / 修改时间：14:43:58" itemprop="dateCreated datePublished" datetime="2020-12-02T10:56:53+08:00">2020-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/coding/c/" itemprop="url" rel="index"><span itemprop="name">c#</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>17k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><strong>1.关于JWT的Token过期问题,到底设置多久过期？</strong></p>
+<p>(1).有的人设置过期时间很长，比如一个月，甚至更长，等到过期了退回登录页面,重新登录重新获取token，期间登录的时候也是重新获取token，然后过期时间又重置为了1个月。这样一旦token被人截取，就可能被人长期使用，如果你想禁止，只能修改token颁发的密钥，这样就会导致所有token都失效，显然不太可取。</p>
+<p>(2).有的人设置比较短，比如10分钟，在使用过程中，一旦过期也是退回登录页面，这样就可能使用过程中经常退回登录页面，体验很不好。</p>
+<p><strong>2. 这里介绍一种比较主流的解决方案—双Token机制</strong></p>
+<p>(1).访问令牌：accessToken，访问接口是需要携带的，也就是我们之前一直使用的那个，过期时间一般设置比较短，根据实际项目分析，比如：10分钟</p>
+<p>(2).刷新令牌：refreshToken，当accessToken过期后，用于获取新的accessToken的时候使用，过期时间一般设置的比较长，比如：7天</p>
+<p><strong>3.获取新的accessToken的时候, 为什么还需要传入旧accessToken，只传入refreshToken不行么？</strong></p>
+<p> 仔细看下面的解决思路，只传入refreshToken也可以，但是传入双Token安全性更高一些。</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li>登录请求过来，将userId和userAccount存到payLoad中，设置不同的过期时间，分别生成accessToken和refreshToken，二者的区别密钥不一样，过期时间不一样，然后把 生成refreshToken的相关信息存到对应的表中【id，userId，token，expire】，一个用户对应一条记录（也可以存到Redis中，这里为了测试，存在一个全局变量中）， 每次登录的时候，添加或者更新记录，最后将双Token返回给前端，前端存到LocalStorage中。</li>
+</ol>
+<p><img data-src="https://res.aimon.cc/img/20201202143643.png" alt="img"></p>
+<p><img data-src="https://res.aimon.cc/img/20201202143743.png" alt="img"></p>
+<ol start="2">
+<li>前端访问GetMsg获取信息接口，表头需要携带accessToken，服务器端通过JwtCheck2过滤器进行校验，验证通过则正常访问，如果不通过返回401和不通过的原因，前端在Error中进行获取,这里区分造成401的原因。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取信息接口</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">GetMsg</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> accessToken = <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;accessToken&quot;</span>);      </span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">                url: <span class="string">&quot;/Home/GetMsg&quot;</span>,</span><br><span class="line">                type: <span class="string">&quot;Post&quot;</span>,</span><br><span class="line">                data: &#123;&#125;,</span><br><span class="line">                datatype: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">                beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xhr</span>) </span>&#123;</span><br><span class="line">                    xhr.setRequestHeader(<span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Bearer &quot;</span> + accessToken);</span><br><span class="line">                &#125;,</span><br><span class="line">                success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (data.status == <span class="string">&quot;ok&quot;</span>) &#123;</span><br><span class="line">                        alert(data.msg);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        alert(data.msg);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="comment">//当安全校验未通过的时候进入这里</span></span><br><span class="line">                error: <span class="function"><span class="keyword">function</span> (<span class="params">xhr</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (xhr.status == <span class="number">401</span>) &#123;</span><br><span class="line">                        <span class="keyword">var</span> errorMsg = xhr.responseText;</span><br><span class="line">                        <span class="built_in">console</span>.log(errorMsg);</span><br><span class="line">                        <span class="comment">//alert(errorMsg);</span></span><br><span class="line">                        <span class="keyword">if</span> (errorMsg == <span class="string">&quot;expired&quot;</span>) &#123;</span><br><span class="line">                            <span class="comment">//表示过期，需要自动刷新</span></span><br><span class="line">                            GetTokenAgain(GetMsg);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">//表示是非法请求，给出提示，可以直接退回登录页</span></span><br><span class="line">                            alert(<span class="string">&quot;非法请求&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>如果是表头为空、校验错误等等，则直接提示请求非法，返回登录页。</li>
+</ol>
+<p><img data-src="https://res.aimon.cc/img/20201202143835.png" alt="img"></p>
+<ol start="4">
+<li>如果捕获的是expired即过期，则调用GetTokenAgain(func)方法，即重新获取accessToken和refreshToken，这里func代表传递进来一个方法名，以便调用成功后重新调用原方法，实现无缝刷新； 向服务器端传递 双Token， 服务器端的验证逻辑如下：</li>
+</ol>
+<p>(1). 先通过纯代码校验refreshToken的物理合法性,如果非法，前端直接报错，返回到登录页面。</p>
+<p>(2). 从accessToken中解析出来userId等其它数据(即使accessToken已经过期，依旧可以解析出来)</p>
+<p>(3). 拿着userId、refreshToken、当前时间去RefreshToken表中查数据，如果查不到，直接返回前端保存，返回到登录页面。</p>
+<p>(4). 如果能查到，重新生成 accessToken和refreshToken，并写入RefreshToken表</p>
+<p>(5). 向前端返回双token，前端进行覆盖存储，然后自动调用原方法，携带新的accessToken，进行访问，从而实现无缝刷新token的问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//重新获取访问令牌和刷新令牌</span></span><br><span class="line">       <span class="function"><span class="keyword">function</span> <span class="title">GetTokenAgain</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">var</span> model = &#123;</span><br><span class="line">               accessToken: <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;accessToken&quot;</span>),</span><br><span class="line">               refreshToken: <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;refreshToken&quot;</span>)</span><br><span class="line">           &#125;;</span><br><span class="line">           $.ajax(&#123;</span><br><span class="line">               url: <span class="string">&#x27;/Home/UpdateAccessToken&#x27;</span>,</span><br><span class="line">               type: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">               dataType: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">               data: model,</span><br><span class="line">               success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                   <span class="keyword">if</span> (data.status == <span class="string">&quot;error&quot;</span>) &#123;</span><br><span class="line">                       <span class="keyword">debugger</span>;</span><br><span class="line">                       <span class="comment">// 表示重新获取令牌失败，可以退回登录页</span></span><br><span class="line">                       alert(<span class="string">&quot;重新获取令牌失败&quot;</span>);</span><br><span class="line"></span><br><span class="line">                   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                       <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;accessToken&quot;</span>, data.data.accessToken);</span><br><span class="line">                       <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;refreshToken&quot;</span>, data.data.refreshToken);</span><br><span class="line">                       func();</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>PS：以上方案，适用于单个页面发送单个ajax请求，如果是多个请求，有顺序的发送，比如第一个发送完，然后再发送第二个，这种场景是没问题的。</strong></p>
+<p><strong>但是，特殊情况如果一个页面多个ajax并行的过来了，如果其中有一个accessToken过期了，那么它会走更新token的机制，这时候refreshToken和accessToken都更新了（数据库中refreshToken也更新了），会导致刚才同时进来的其它ajax的refreshToken验证不过，从而无法刷新双token。</strong></p>
+<p><strong>针对这种特殊情况，作为取舍，更新accessToken的方法中，不更新refreshToken， 那么refreshToken过期，本来也是要进入 登录页的，所以针对这类情况，这种取舍也无可厚非。</strong></p>
+<p>下面分享完整版代码：</p>
+<p>前端代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">@&#123;</span><br><span class="line">    Layout = null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Index<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;~/lib/jquery/dist/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">&#x27;#btn1&#x27;</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line">                Login();</span><br><span class="line">            &#125;);</span><br><span class="line"><span class="javascript">            $(<span class="string">&#x27;#btn2&#x27;</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line">                GetMsg();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">//登录接口</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">Login</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">                url: <span class="string">&quot;/Home/CheckLogin&quot;</span>,</span></span><br><span class="line"><span class="javascript">                type: <span class="string">&quot;Post&quot;</span>,</span></span><br><span class="line"><span class="javascript">                data: &#123; <span class="attr">userAccount</span>: <span class="string">&quot;admin&quot;</span>, <span class="attr">userPwd</span>: <span class="string">&quot;123456&quot;</span> &#125;,</span></span><br><span class="line"><span class="javascript">                datatype: <span class="string">&quot;json&quot;</span>,</span></span><br><span class="line"><span class="javascript">                success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (data.status == <span class="string">&quot;ok&quot;</span>) &#123;</span></span><br><span class="line">                        alert(data.msg);</span><br><span class="line"><span class="javascript">                        <span class="built_in">console</span>.log(data.data.accessToken);</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">console</span>.log(data.data.refreshToken);</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;accessToken&quot;</span>, data.data.accessToken);</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;refreshToken&quot;</span>, data.data.refreshToken);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                        alert(data.msg);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                <span class="comment">//当安全校验未通过的时候进入这里</span></span></span><br><span class="line"><span class="javascript">                error: <span class="function"><span class="keyword">function</span> (<span class="params">xhr</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (xhr.status == <span class="number">401</span>) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">console</span>.log(xhr.responseText);</span></span><br><span class="line">                        alert(xhr.responseText)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">//获取信息接口</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">GetMsg</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> accessToken = <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;accessToken&quot;</span>);</span></span><br><span class="line"><span class="javascript">            $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">                url: <span class="string">&quot;/Home/GetMsg&quot;</span>,</span></span><br><span class="line"><span class="javascript">                type: <span class="string">&quot;Post&quot;</span>,</span></span><br><span class="line">                data: &#123;&#125;,</span><br><span class="line"><span class="javascript">                datatype: <span class="string">&quot;json&quot;</span>,</span></span><br><span class="line"><span class="javascript">                beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xhr</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    xhr.setRequestHeader(<span class="string">&quot;Authorization&quot;</span>, <span class="string">&quot;Bearer &quot;</span> + accessToken);</span></span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (data.status == <span class="string">&quot;ok&quot;</span>) &#123;</span></span><br><span class="line">                        alert(data.msg);</span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                        alert(data.msg);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line"><span class="javascript">                <span class="comment">//当安全校验未通过的时候进入这里</span></span></span><br><span class="line"><span class="javascript">                error: <span class="function"><span class="keyword">function</span> (<span class="params">xhr</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (xhr.status == <span class="number">401</span>) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">var</span> errorMsg = xhr.responseText;</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">console</span>.log(errorMsg);</span></span><br><span class="line"><span class="javascript">                        <span class="comment">//alert(errorMsg);</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">if</span> (errorMsg == <span class="string">&quot;expired&quot;</span>) &#123;</span></span><br><span class="line"><span class="javascript">                            <span class="comment">//表示过期，需要自动刷新</span></span></span><br><span class="line">                            GetTokenAgain(GetMsg);</span><br><span class="line"><span class="javascript">                        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                            <span class="comment">//表示是非法请求，给出提示，可以直接退回登录页</span></span></span><br><span class="line"><span class="javascript">                            alert(<span class="string">&quot;非法请求&quot;</span>);</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">//重新获取访问令牌和刷新令牌</span></span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">GetTokenAgain</span>(<span class="params">func</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> model = &#123;</span></span><br><span class="line"><span class="javascript">                accessToken: <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;accessToken&quot;</span>),</span></span><br><span class="line"><span class="javascript">                refreshToken: <span class="built_in">window</span>.localStorage.getItem(<span class="string">&quot;refreshToken&quot;</span>)</span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="javascript">            $.ajax(&#123;</span></span><br><span class="line"><span class="javascript">                url: <span class="string">&#x27;/Home/UpdateAccessToken&#x27;</span>,</span></span><br><span class="line"><span class="javascript">                type: <span class="string">&quot;POST&quot;</span>,</span></span><br><span class="line"><span class="javascript">                dataType: <span class="string">&quot;json&quot;</span>,</span></span><br><span class="line">                data: model,</span><br><span class="line"><span class="javascript">                success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (data.status == <span class="string">&quot;error&quot;</span>) &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">debugger</span>;</span></span><br><span class="line"><span class="javascript">                        <span class="comment">// 表示重新获取令牌失败，可以退回登录页</span></span></span><br><span class="line"><span class="javascript">                        alert(<span class="string">&quot;重新获取令牌失败&quot;</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;accessToken&quot;</span>, data.data.accessToken);</span></span><br><span class="line"><span class="javascript">                        <span class="built_in">window</span>.localStorage.setItem(<span class="string">&quot;refreshToken&quot;</span>, data.data.refreshToken);</span></span><br><span class="line">                        func();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span>&gt;</span>模拟登陆逻辑<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn2&quot;</span>&gt;</span>获取系统信息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>服务器端代码1：</p>
+<p><strong>（PS：如果有上面提到的特殊情况，则去掉更新机制中 4.2和4.3的代码）</strong></p>
+<p>相关接口</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HomeController</span> : <span class="title">Controller</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="title">List</span>&lt;<span class="title">RefreshToken</span>&gt; rTokenList</span> = <span class="keyword">new</span> List&lt;RefreshToken&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> IConfiguration _Configuration &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HomeController</span>(<span class="params">IConfiguration Configuration</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>._Configuration = Configuration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 测试页面</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">Index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">return</span> View();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 校验登录</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;userAccount&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;userPwd&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    [<span class="meta">HttpPost</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">CheckLogin</span>(<span class="params"><span class="built_in">string</span> userAccount, <span class="built_in">string</span> userPwd</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (userAccount == <span class="string">&quot;admin&quot;</span> &amp;&amp; userPwd == <span class="string">&quot;123456&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">string</span> AccessTokenKey = _Configuration[<span class="string">&quot;AccessTokenKey&quot;</span>];</span><br><span class="line">            <span class="built_in">string</span> RefreshTokenKey = _Configuration[<span class="string">&quot;RefreshTokenKey&quot;</span>];</span><br><span class="line"></span><br><span class="line">            <span class="comment">//1.先去数据库中吧userId查出来</span></span><br><span class="line">            <span class="built_in">string</span> userId = <span class="string">&quot;001&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//2. 生成accessToken</span></span><br><span class="line">            <span class="comment">//过期时间(下面表示签名后 5分钟过期，这里设置20s为了演示)</span></span><br><span class="line">            <span class="built_in">double</span> exp = (DateTime.UtcNow.AddSeconds(<span class="number">20</span>) - <span class="keyword">new</span> DateTime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>)).TotalSeconds;</span><br><span class="line">            <span class="keyword">var</span> payload = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                          &#123;<span class="string">&quot;userId&quot;</span>, userId &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;userAccount&quot;</span>, userAccount &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;exp&quot;</span>,exp &#125;</span><br><span class="line">                     &#125;;</span><br><span class="line">            <span class="keyword">var</span> accessToken = JWTHelp.JWTJiaM(payload, AccessTokenKey);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//3.生成refreshToken</span></span><br><span class="line">            <span class="comment">//过期时间(可以不设置，下面表示 2天过期)</span></span><br><span class="line">            <span class="keyword">var</span> expireTime = DateTime.Now.AddDays(<span class="number">2</span>);</span><br><span class="line">            <span class="built_in">double</span> exp2 = (expireTime - <span class="keyword">new</span> DateTime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>)).TotalSeconds;</span><br><span class="line">            <span class="keyword">var</span> payload2 = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                          &#123;<span class="string">&quot;userId&quot;</span>, userId &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;userAccount&quot;</span>, userAccount &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;exp&quot;</span>,exp2 &#125;</span><br><span class="line">                     &#125;;</span><br><span class="line">            <span class="keyword">var</span> refreshToken = JWTHelp.JWTJiaM(payload2, RefreshTokenKey);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//4.将生成refreshToken的原始信息存到数据库/Redis中 （这里暂时存到一个全局变量中）</span></span><br><span class="line">            <span class="comment">//先查询有没有，有则更新，没有则添加</span></span><br><span class="line">            <span class="keyword">var</span> RefreshTokenItem = rTokenList.Where(u =&gt; u.userId == userId).FirstOrDefault();</span><br><span class="line">            <span class="keyword">if</span> (RefreshTokenItem == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                RefreshToken rItem = <span class="keyword">new</span> RefreshToken()</span><br><span class="line">                &#123;</span><br><span class="line">                    id = Guid.NewGuid().ToString(<span class="string">&quot;N&quot;</span>),</span><br><span class="line">                    userId = userId,</span><br><span class="line">                    expire = expireTime,</span><br><span class="line">                    Token = refreshToken</span><br><span class="line">                &#125;;</span><br><span class="line">                rTokenList.Add(rItem);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                RefreshTokenItem.Token = refreshToken;</span><br><span class="line">                RefreshTokenItem.expire = expireTime;   <span class="comment">//要和前面生成的过期时间相匹配</span></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> Json(<span class="keyword">new</span></span><br><span class="line">            &#123;</span><br><span class="line">                status = <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">                msg = <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">                data = <span class="keyword">new</span></span><br><span class="line">                &#123;</span><br><span class="line">                    accessToken,</span><br><span class="line">                    refreshToken</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> Json(<span class="keyword">new</span></span><br><span class="line">            &#123;</span><br><span class="line">                status = <span class="string">&quot;error&quot;</span>,</span><br><span class="line">                msg = <span class="string">&quot;登录失败&quot;</span>,</span><br><span class="line">                data = <span class="keyword">new</span> &#123; &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 获取系统信息接口</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    [<span class="meta">TypeFilter(typeof(JwtCheck2))</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">GetMsg</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="built_in">string</span> msg = <span class="string">&quot;windows10&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> Json(<span class="keyword">new</span> &#123; status = <span class="string">&quot;ok&quot;</span>, msg = msg &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 更新访问令牌(同时也更新刷新令牌)</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">UpdateAccessToken</span>(<span class="params"><span class="built_in">string</span> accessToken, <span class="built_in">string</span> refreshToken</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">string</span> AccessTokenKey = _Configuration[<span class="string">&quot;AccessTokenKey&quot;</span>];</span><br><span class="line">        <span class="built_in">string</span> RefreshTokenKey = _Configuration[<span class="string">&quot;RefreshTokenKey&quot;</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.先通过纯代码校验refreshToken的物理合法性</span></span><br><span class="line">        <span class="keyword">var</span> result = JWTHelp.JWTJieM(refreshToken, _Configuration[<span class="string">&quot;RefreshTokenKey&quot;</span>]);</span><br><span class="line">        <span class="keyword">if</span> (result == <span class="string">&quot;expired&quot;</span> || result == <span class="string">&quot;invalid&quot;</span> || result == <span class="string">&quot;error&quot;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> Json(<span class="keyword">new</span> &#123; status = <span class="string">&quot;error&quot;</span>, data = <span class="string">&quot;&quot;</span> &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.从accessToken中解析出来userId等其它数据(即使accessToken已经过期，依旧可以解析出来)</span></span><br><span class="line">        JwtData myJwtData = JsonConvert.DeserializeObject&lt;JwtData&gt;(<span class="keyword">this</span>.Base64UrlDecode(accessToken.Split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>]));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 拿着userId、refreshToken、当前时间去RefreshToken表中查数据</span></span><br><span class="line">        <span class="keyword">var</span> rTokenItem = rTokenList.Where(u =&gt; u.userId == myJwtData.userId &amp;&amp; u.Token == refreshToken &amp;&amp; u.expire &gt; DateTime.Now).FirstOrDefault();</span><br><span class="line">        <span class="keyword">if</span> (rTokenItem == <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> Json(<span class="keyword">new</span> &#123; status = <span class="string">&quot;error&quot;</span>, data = <span class="string">&quot;&quot;</span> &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.重新生成 accessToken和refreshToken，并写入RefreshToken表</span></span><br><span class="line">        <span class="comment">//4.1. 生成accessToken</span></span><br><span class="line">        <span class="comment">//过期时间(下面表示签名后 5分钟过期，这里设置20s为了演示)</span></span><br><span class="line">        <span class="built_in">double</span> exp = (DateTime.UtcNow.AddSeconds(<span class="number">20</span>) - <span class="keyword">new</span> DateTime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>)).TotalSeconds;</span><br><span class="line">        <span class="keyword">var</span> payload = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                          &#123;<span class="string">&quot;userId&quot;</span>, myJwtData.userId &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;userAccount&quot;</span>, myJwtData.userAccount &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;exp&quot;</span>,exp &#125;</span><br><span class="line">                     &#125;;</span><br><span class="line">        <span class="keyword">var</span> MyAccessToken = JWTHelp.JWTJiaM(payload, AccessTokenKey);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.2.生成refreshToken</span></span><br><span class="line">        <span class="comment">//过期时间(可以不设置，下面表示签名后 2天过期)</span></span><br><span class="line">        <span class="keyword">var</span> expireTime = DateTime.Now.AddDays(<span class="number">2</span>);</span><br><span class="line">        <span class="built_in">double</span> exp2 = (expireTime - <span class="keyword">new</span> DateTime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>)).TotalSeconds;</span><br><span class="line">        <span class="keyword">var</span> payload2 = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                          &#123;<span class="string">&quot;userId&quot;</span>, myJwtData.userId &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;userAccount&quot;</span>, myJwtData.userAccount &#125;,</span><br><span class="line">                          &#123;<span class="string">&quot;exp&quot;</span>,exp2 &#125;</span><br><span class="line">                     &#125;;</span><br><span class="line">        <span class="keyword">var</span> MyRefreshToken = JWTHelp.JWTJiaM(payload2, RefreshTokenKey);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.3 更新refreshToken表</span></span><br><span class="line">        rTokenItem.Token = MyRefreshToken;</span><br><span class="line">        rTokenItem.expire = expireTime;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//5. 返回双Token</span></span><br><span class="line">        <span class="keyword">return</span> Json(<span class="keyword">new</span></span><br><span class="line">        &#123;</span><br><span class="line">            status = <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">            data = <span class="keyword">new</span></span><br><span class="line">            &#123;</span><br><span class="line">                accessToken = MyAccessToken,</span><br><span class="line">                refreshToken = MyRefreshToken</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> Base64解码</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;base64UrlStr&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">Base64UrlDecode</span>(<span class="params"><span class="built_in">string</span> base64UrlStr</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        base64UrlStr = base64UrlStr.Replace(<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;+&#x27;</span>).Replace(<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">        <span class="keyword">switch</span> (base64UrlStr.Length % <span class="number">4</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                base64UrlStr += <span class="string">&quot;==&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                base64UrlStr += <span class="string">&quot;=&quot;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> bytes = Convert.FromBase64String(base64UrlStr);</span><br><span class="line">        <span class="keyword">return</span> Encoding.UTF8.GetString(bytes);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 服务器端代码2：</p>
+<p>JWT帮助类</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Jwt的加密和解密</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 注：加密和加密用的是用一个密钥</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 依赖程序集：【JWT】</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">JWTHelp</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> JWT加密算法</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;payload&quot;&gt;</span>负荷部分，存储使用的信息<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;secret&quot;&gt;</span>密钥<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;extraHeaders&quot;&gt;</span>存放表头额外的信息,不需要的话可以不传<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">JWTJiaM</span>(<span class="params">IDictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt; payload, <span class="built_in">string</span> secret, IDictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt; extraHeaders = <span class="literal">null</span></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        IJwtAlgorithm algorithm = <span class="keyword">new</span> HMACSHA256Algorithm();</span><br><span class="line">        IJsonSerializer serializer = <span class="keyword">new</span> JsonNetSerializer();</span><br><span class="line">        IBase64UrlEncoder urlEncoder = <span class="keyword">new</span> JwtBase64UrlEncoder();</span><br><span class="line">        IJwtEncoder encoder = <span class="keyword">new</span> JwtEncoder(algorithm, serializer, urlEncoder);</span><br><span class="line">        <span class="keyword">var</span> token = encoder.Encode(payload, secret);</span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> JWT解密算法</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;token&quot;&gt;</span>需要解密的token串<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;secret&quot;&gt;</span>密钥<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">JWTJieM</span>(<span class="params"><span class="built_in">string</span> token, <span class="built_in">string</span> secret</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            IJsonSerializer serializer = <span class="keyword">new</span> JsonNetSerializer();</span><br><span class="line">            IDateTimeProvider provider = <span class="keyword">new</span> UtcDateTimeProvider();</span><br><span class="line">            IJwtValidator validator = <span class="keyword">new</span> JwtValidator(serializer, provider);</span><br><span class="line">            IBase64UrlEncoder urlEncoder = <span class="keyword">new</span> JwtBase64UrlEncoder();</span><br><span class="line">            IJwtDecoder decoder = <span class="keyword">new</span> JwtDecoder(serializer, validator, urlEncoder);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> json = decoder.Decode(token, secret, <span class="literal">true</span>);</span><br><span class="line">            <span class="comment">//校验通过，返回解密后的字符串</span></span><br><span class="line">            <span class="keyword">return</span> json;</span><br><span class="line">        &#125;</span><br><span class="line">        catch (TokenExpiredException)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//表示过期</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;expired&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        catch (SignatureVerificationException)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//表示验证不通过</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;invalid&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 服务器端代码3：</p>
+<p>实体类</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">RefreshToken</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//主键</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="comment">//用户编号</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> userId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="comment">//refreshToken</span></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Token &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="comment">//过期时间</span></span><br><span class="line">    <span class="keyword">public</span> DateTime expire &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">JwtData</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> DateTime expire &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;  <span class="comment">//代表过期时间</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> userId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> userAccount &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤器代码：</p>
+<p>View Code</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Bearer认证,返回ajax中的error</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 校验访问令牌的合法性</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">JwtCheck2</span> : <span class="title">ActionFilterAttribute</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IConfiguration _configuration;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JwtCheck2</span>(<span class="params">IConfiguration configuration</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        _configuration = configuration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> action执行前执行</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;context&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnActionExecuting</span>(<span class="params">ActionExecutingContext context</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">//1.判断是否需要校验</span></span><br><span class="line">        <span class="keyword">var</span> isSkip = context.ActionDescriptor.EndpointMetadata.Any(x =&gt; x.GetType() == <span class="keyword">typeof</span>(SkipAttribute));</span><br><span class="line">        <span class="keyword">if</span> (isSkip == <span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//2. 判断是什么请求(ajax or 非ajax)</span></span><br><span class="line">            <span class="keyword">var</span> actionContext = context.HttpContext;</span><br><span class="line">            <span class="keyword">if</span> (IsAjaxRequest(actionContext.Request))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//表示是ajax</span></span><br><span class="line">                <span class="keyword">var</span> token = context.HttpContext.Request.Headers[<span class="string">&quot;Authorization&quot;</span>].ToString();    <span class="comment">//ajax请求传过来</span></span><br><span class="line">                <span class="built_in">string</span> pattern = <span class="string">&quot;^Bearer (.*?)$&quot;</span>;</span><br><span class="line">                <span class="keyword">if</span> (!Regex.IsMatch(token, pattern))</span><br><span class="line">                &#123;</span><br><span class="line">                    context.Result = <span class="keyword">new</span> ContentResult &#123; StatusCode = <span class="number">401</span>, Content = <span class="string">&quot;token格式不对!格式为:Bearer &#123;token&#125;&quot;</span> &#125;;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                token = Regex.Match(token, pattern).Groups[<span class="number">1</span>]?.ToString();</span><br><span class="line">                <span class="keyword">if</span> (token == <span class="string">&quot;null&quot;</span> || <span class="built_in">string</span>.IsNullOrEmpty(token))</span><br><span class="line">                &#123;</span><br><span class="line">                    context.Result = <span class="keyword">new</span> ContentResult &#123; StatusCode = <span class="number">401</span>, Content = <span class="string">&quot;token不能为空&quot;</span> &#125;;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//校验auth的正确性</span></span><br><span class="line">                <span class="keyword">var</span> result = JWTHelp.JWTJieM(token, _configuration[<span class="string">&quot;AccessTokenKey&quot;</span>]);</span><br><span class="line">                <span class="keyword">if</span> (result == <span class="string">&quot;expired&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    context.Result = <span class="keyword">new</span> ContentResult &#123; StatusCode = <span class="number">401</span>, Content = <span class="string">&quot;expired&quot;</span> &#125;;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (result == <span class="string">&quot;invalid&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    context.Result = <span class="keyword">new</span> ContentResult &#123; StatusCode = <span class="number">401</span>, Content = <span class="string">&quot;invalid&quot;</span> &#125;;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (result == <span class="string">&quot;error&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    context.Result = <span class="keyword">new</span> ContentResult &#123; StatusCode = <span class="number">401</span>, Content = <span class="string">&quot;error&quot;</span> &#125;;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">//表示校验通过,用于向控制器中传值</span></span><br><span class="line">                    context.RouteData.Values.Add(<span class="string">&quot;auth&quot;</span>, result);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//表示是非ajax请求，则auth拼接在参数中传过来</span></span><br><span class="line">                context.Result = <span class="keyword">new</span> RedirectResult(<span class="string">&quot;/Home/NoPerIndex?reason=null&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 判断该请求是否是ajax请求</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;request&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">IsAjaxRequest</span>(<span class="params">HttpRequest request</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="built_in">string</span> header = request.Headers[<span class="string">&quot;X-Requested-With&quot;</span>];</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;XMLHttpRequest&quot;</span>.Equals(header);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p> 　将accessToken的过期时间设置为20s，点击登录授权后，等待20s，然后点击获取信息按钮，依旧能获取信息，无缝衔接，进行了双token的更新。</p>
+<p> <img data-src="https://res.aimon.cc/img/20201202143924.png" alt="img"></p>
+<p><img data-src="https://res.aimon.cc/img/20201202143937.png" alt="img"></p>
+<blockquote>
+<p> 转自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yaopengfei/p/12449213.html">https://www.cnblogs.com/yaopengfei/p/12449213.html</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>aimon
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.aimon.cc/post/13860cc7.html" title="Asp.Net Core中JWT刷新Token解决方案">https://www.aimon.cc/post/13860cc7.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c#</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/ec878511.html" rel="prev" title="Windows Terminal 终极美化">
+                  <i class="fa fa-chevron-left"></i> Windows Terminal 终极美化
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备2020066310号 </a>
+      <img src="http://www.beian.gov.cn/portal/download" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">六月的雨</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+  <script>
+    NProgress.configure({
+      showSpinner: true
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
+
+  
+
+
+
+
+    <div class="pjax">
+
+
+    </div>
+</body>
+</html>
