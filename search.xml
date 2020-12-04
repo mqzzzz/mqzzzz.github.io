@@ -91,6 +91,142 @@
       </tags>
   </entry>
   <entry>
+    <title>Windows Terminal 终极美化</title>
+    <url>/post/ec878511.html</url>
+    <content><![CDATA[<h4 id="安装-Window-Terminal"><a href="#安装-Window-Terminal" class="headerlink" title="安装 Window Terminal"></a>安装 Window Terminal</h4><p>有两种安装方式，这个要自行选择</p>
+<h5 id="git-安装"><a href="#git-安装" class="headerlink" title="git 安装"></a>git 安装</h5><p><del>前往 windows terminal 的地址下载，再使用vs2019 进行编译使用。我是拉了关天，没拉下来，放弃了。</del></p>
+<h5 id="商店安装"><a href="#商店安装" class="headerlink" title="商店安装"></a>商店安装</h5><p>在微软商店里搜windows terminal，安装即可。</p>
+<ol>
+<li><p>商店打不开的，自行解决，直接了当的方式就是升级系统到最新版本，重启。</p>
+</li>
+<li><p>提示当前所在的区域不支持的话 ： </p>
+<blockquote>
+<p>登录账号的进账号把自己所在区域地址改成美国，然后把系统时间设置成美国。重启</p>
+</blockquote>
+</li>
+</ol>
+<p>正常情况下，你会安装成功的。 可以继续往下看了，先放一张图：   </p>
+<p><img data-src="https://res.aimon.cc/img/20201201201321.jpeg" alt="钢铁侠"></p>
+<p>下面开工：</p>
+<h4 id="配置解释"><a href="#配置解释" class="headerlink" title="配置解释"></a>配置解释</h4><p>用到的就以下这些了，其他用不着的就不写了。 </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      &quot;acrylicOpacity&quot;: 0.1, //背景透明度(0-1)</span><br><span class="line">      &quot;useAcrylic&quot;: true, // 启用毛玻璃</span><br><span class="line">      &quot;backgroundImage&quot;: &quot;D:/User/chuchur/OneDrive/图片/stack.jpg&quot;, //背景图片</span><br><span class="line">      &quot;backgroundImageOpacity&quot;: 0.1, //图片透明度（0-1）</span><br><span class="line">      &quot;experimental.retroTerminalEffect&quot;: true, //复古的CRT 效果</span><br><span class="line">      &quot;backgroundImageStretchMode&quot;: &quot;uniformToFill&quot;, //填充模式</span><br><span class="line">      &quot;icon&quot;: &quot;ms-appx:///ProfileIcons/&#123;9acb9455-ca41-5af7-950f-6bca1bc9722f&#125;.png&quot;, //图标</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 12, //文字大小</span><br><span class="line">      &quot;fontWeight&quot;: &quot;think&quot;, //文字宽度，可设置加粗</span><br><span class="line">      &quot;colorScheme&quot;: &quot;Solarized Dark&quot;, //主题名字</span><br><span class="line">      &quot;cursorColor&quot;: &quot;#FFFFFF&quot;, //光标颜色</span><br><span class="line">      &quot;cursorShape&quot;: &quot;bar&quot;, //光标形状</span><br><span class="line">      &quot;startingDirectory&quot;: &quot;D://Projects//&quot;, //起始目录</span><br><span class="line">      &quot;antialiasingMode&quot;: &quot;cleartype&quot; //消除文字锯齿</span><br><span class="line">    &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="复古的CRT-效果"><a href="#复古的CRT-效果" class="headerlink" title="复古的CRT 效果"></a>复古的CRT 效果</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;experimental.retroTerminalEffect&quot;: true</span><br></pre></td></tr></table></figure>
+
+<p>先说说复古模式，这个设计初衷是好的，我怎么觉得是眼瞎模式呢，本来300瓦的近视，开启这种模式之后，瞬间到500瓦了。 i7十代的 16G的配置，开启这种模式之后，卡成狗。很烧性能，但是装个逼什么的还是可以的，真正用起来，不建议使用，可能还在摸索阶段吧，Bug 多。放个图：</p>
+<p><img data-src="https://res.aimon.cc/img/20201201201602.jpeg" alt="Window Terminal CRT"></p>
+<blockquote>
+<p>装逼专用配置😄</p>
+</blockquote>
+<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><p>先安装Sarasa[更纱黑体] 字体 ，一会要使用的是Sarasa Term SC, 链接：点击 github 下载更纱黑体 嫌弃github慢的，右键这里下载在安装包找到Sarasa Term系列全部安装 安装完之后，在profiles.json文件 配置上字体 </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      ....</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 14, //文字大小</span><br><span class="line">      ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h4><p>因为执行Install-Module会报错以下信息：因为在此系统上禁止运行脚本。有关详细信息，先以管理员权限运行windows terminal，然后执行以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment">##允许执行脚本</span></span><br><span class="line"><span class="built_in">set-executionpolicy</span> remotesigned</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> [<span class="type">moudel</span> <span class="type">name</span>] <span class="literal">-Scope</span> CurrentUser  <span class="comment">#只为当前用户安装</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>Post-Git和Git-Aliases可以实现类似oh-my-zsh一样的Git增强(命令别名和显示分支等信息) oh-my-posh提供 了非常漂亮的主题。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Install-Module git-aliases -AllowClobber</span><br><span class="line">Install-Module posh-git</span><br><span class="line">Install-Module oh-my-posh #</span><br><span class="line">Install-Module DirColors  #让 ls (Get-ChildItem) 像 Unix 系终端一样具有多彩色</span><br></pre></td></tr></table></figure>
+
+<p>oh-my-posh提供了10款漂亮的主题供我们选择。</p>
+<p> Agnoster,Avit,Darkblood,Fish,Honukai,Paradox,PowerLine,robbyrussell,Sorin,tehrob </p>
+<p>可以使用Set-Theme [主题名]配置主题</p>
+<h5 id="加载模块和设置主题"><a href="#加载模块和设置主题" class="headerlink" title="加载模块和设置主题"></a>加载模块和设置主题</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> DirColors</span><br><span class="line"><span class="built_in">Import-Module</span> posh<span class="literal">-git</span></span><br><span class="line"><span class="built_in">Import-Module</span> <span class="built_in">oh</span><span class="literal">-my</span><span class="literal">-posh</span></span><br><span class="line"><span class="built_in">Import-Module</span> git<span class="literal">-aliases</span> <span class="literal">-DisableNameChecking</span></span><br><span class="line"><span class="built_in">Set-Theme</span> PowerLine</span><br></pre></td></tr></table></figure>
+
+<h4 id="保存配置，永久生效"><a href="#保存配置，永久生效" class="headerlink" title="保存配置，永久生效"></a>保存配置，永久生效</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PROFILE    # 输入此命令，$符号也要一起，查看配置文件的全路径</span><br></pre></td></tr></table></figure>
+
+<p>正常情况 ，你会看到 C:\Users[your name]\Documents\WindowsPowerShell\Microsoft. PowerShell_profile.ps1 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">code $PROFILE  # 输入此命令,使用 vscode 打开(或创建)配置文件, notepad 也可以</span><br></pre></td></tr></table></figure>
+
+<p>在打开的Microsoft.PowerShell_profile.ps1, 保存以下配置 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module DirColors</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module git-aliases -DisableNameChecking</span><br><span class="line">Set-Theme PowerLine</span><br></pre></td></tr></table></figure>
+
+<h4 id="主题颜色美化"><a href="#主题颜色美化" class="headerlink" title="主题颜色美化"></a>主题颜色美化</h4><h5 id="使用官方的colortool"><a href="#使用官方的colortool" class="headerlink" title="使用官方的colortool"></a>使用官方的colortool</h5><p>安装 colortool </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scoop install colortool</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>scoop 安装请参见windows 10 包管理</p>
+</blockquote>
+<p>colortool 的相关命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c --current：打印当前应用方案的颜色表</span><br><span class="line">-q --quiet：使用后不要打印颜色表</span><br><span class="line">-e --errors：在控制台上报告方案分析错误</span><br><span class="line">-d --defaults：仅将方案应用于注册表中的默认值</span><br><span class="line">-b --both：将方案同时应用于当前控制台和默认控制台。</span><br><span class="line">-x --xterm：使用VT序列设置颜色。用于设置WSL中的颜色。仅适用于Windows版本&gt;=17048。</span><br><span class="line">-s --schemes：显示所有可用的方案</span><br><span class="line">-l --location：显示schemes目录的完整路径</span><br><span class="line">-v --version：显示版本号</span><br><span class="line">-o --output&lt;filename&gt;：将当前颜色表输出到文件（以.ini格式）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-是缩写，–是全写 </p>
+</blockquote>
+<p>使用colortool -s看到 也提供了 8 套配色方案:</p>
+<ul>
+<li>campbell-legacy.ini </li>
+<li>campbell.ini </li>
+<li>cmd-legacy.ini </li>
+<li>deuteranopia.itermcolors </li>
+<li>OneHalfDark.itermcolors </li>
+<li>OneHalfLight.itermcolors </li>
+<li>solarized_dark.itermcolors </li>
+<li>solarized_light.itermcolors </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">colortool -b OneHalfDark.itermcolors</span><br></pre></td></tr></table></figure>
+
+<p>将OneHalfDark.itermcolors主题应用到当前控制台 ,Mac使用惯了， 你也可以来一波自定义的方案</p>
+<h5 id="手动配色"><a href="#手动配色" class="headerlink" title="手动配色"></a>手动配色</h5><p>就是用iterm2的主题颜色吧，人家都已经写好了。直接使用就是了 打开 iTerm2-Color-Schemes, 找到配色的.json文件，把里面的配色复制到schemes下面就可以了。我这里选了两款Solarized的主题，</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;:&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">&quot;schemes&quot;:[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Dark&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#002831&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#d11c24&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#738a05&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#a57706&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2176c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#c61c6f&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#259286&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#eae3cb&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#bd3613&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#536870&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#708284&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#5956ba&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#819090&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#fcf4dc&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#001e27&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#708284&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Darcula&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#3d3f41&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>到此美化就收工了。</p>
+<h4 id="分屏-多窗格-缩放"><a href="#分屏-多窗格-缩放" class="headerlink" title="分屏/ 多窗格 / 缩放"></a>分屏/ 多窗格 / 缩放</h4><p>他可以像 Item2 一样 在同一 Tab 下 分屏，如下图： </p>
+<p><img data-src="https://res.aimon.cc/img/20201201221316.jpeg" alt="多窗格"></p>
+<p>分屏快捷键如下： </p>
+<p>水平分屏：Alt + Shift + 减号 </p>
+<p>垂直分屏：Alt + Shift + 加号 </p>
+<p>切换聚焦的分屏视图：alt + (left/right/up/down) </p>
+<p>调节分屏的窗口大小：alt + shift + (left/right/up/down) </p>
+<p>缩放当前视图：Ctrl+ 加号/减号 （或者 Ctrl + 鼠标滚轮） </p>
+<blockquote>
+<p>那我不想分屏，我要删掉一个怎么办？ 这个问题问的好，直接输入exit即可退出分屏 著作权归作者所有。</p>
+</blockquote>
+<h4 id="PowerShell-的更新"><a href="#PowerShell-的更新" class="headerlink" title="PowerShell 的更新"></a>PowerShell 的更新</h4><p>自带的 PS 版本　是 5.0 的 ，可以升级到更高版本， 目前稳定版本为 7.x </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PSVersionTable.PSVersion.Major   #查看Powershell版本</span><br><span class="line">$PSVersionTable.CLRVersion.Major  #查看.NET Framework版本</span><br></pre></td></tr></table></figure>
+
+<p>在<a href="https://github.com/PowerShell/PowerShell/releases">这里</a>找到**x64.msi,下载安装即可。</p>
+<h4 id="关于-ssh-的配置"><a href="#关于-ssh-的配置" class="headerlink" title="关于 ssh 的配置"></a>关于 ssh 的配置</h4><h5 id="新建-config-文件"><a href="#新建-config-文件" class="headerlink" title="新建 config 文件"></a>新建 config 文件</h5><p>在.ssh目录（就是你的.pub 默认生成位置, 通常是C:\Users[your name].ssh），新建一个config文件，没有后缀，内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host          aliyun</span><br><span class="line">HostName      192.168.1.1</span><br><span class="line">Port          22</span><br><span class="line">User          root</span><br><span class="line">IdentityFile  C:&#x2F;Users&#x2F;[your name]&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>IdentityFile 是 ssh 的 key，你要自己生成。</p>
+<h5 id="配置-profiles-json"><a href="#配置-profiles-json" class="headerlink" title="配置 profiles.json"></a>配置 profiles.json</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;9a138488-58fc-4a7a-b3c2-3af9ba5bc7bb&#125;&quot;</span>, <span class="comment">//这个你要自己生成</span></span><br><span class="line">      <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;ssh aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;aliyun-Linux&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.guidgen.com/">在这里可以在线生成 GUID</a> </p>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>直接执行： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh aliyun</span><br></pre></td></tr></table></figure>
+
+<p>这样就直接登录阿里云了。</p>
+<h4 id="关于-bash-的配置"><a href="#关于-bash-的配置" class="headerlink" title="关于 bash 的配置"></a>关于 bash 的配置</h4><h5 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h5><p>依次打开–控制面板–系统和安全—系统—-高级系统设置, 找不到就 输命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">control system</span><br></pre></td></tr></table></figure>
+
+<p>系统属性—高级—环境变量—系统变量，找到Path变量，编辑，新建一个，把git的bin路径加进去，(如D:\Program files\git\bin)，一路保存就可以了。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// Make changes here to the powershell.exe profile</span></span><br><span class="line">        <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6109&#125;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;bash.exe&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;closeOnExit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;fontFace&quot;</span>: <span class="string">&quot;Sarasa Term SC&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;hidden&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;snapOnInput&quot;</span>: <span class="literal">true</span>, <span class="comment">// 捕捉输入</span></span><br><span class="line">        <span class="comment">// &quot;startingDirectory&quot;: &quot;%USERPROFILE%&quot;</span></span><br><span class="line">        <span class="attr">&quot;startingDirectory&quot;</span>: <span class="string">&quot;d://Projects//dobo&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就配置完成了，你新建 bash 标签。就可以使用 bash 了。</p>
+<h4 id="鼠标右键菜单的配置"><a href="#鼠标右键菜单的配置" class="headerlink" title="鼠标右键菜单的配置"></a>鼠标右键菜单的配置</h4><p>这个需要改注册表来完成 新建一个文件wt.reg，内容如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]</span><br><span class="line">@=<span class="string">&quot;贾维斯,来个命令窗口&quot;</span></span><br><span class="line"><span class="string">&quot;Icon&quot;</span>=<span class="string">&quot;D:\\User\\chuchur\\OneDrive\\图片\\wt.ico&quot;</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]</span><br><span class="line">@=<span class="string">&quot;C:\\Users\\chuchur\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个@ 是菜单项的名字，下面那个Icon 就是菜单项的图标，也可以不要，第二个@就是点击要执行的程序。 </p>
+<blockquote>
+<p>从商店安装的叫wt.exe， 自行编译的叫wtd.exe。 这个还是得区分下</p>
+</blockquote>
+<p>保存，然后双击执行wt.reg，导入注册表，就完事了。</p>
+<h4 id="快捷执行方式"><a href="#快捷执行方式" class="headerlink" title="快捷执行方式"></a>快捷执行方式</h4><ol>
+<li>写在以上，搞定鼠标右键 </li>
+<li>Win+R 输入wt ，回车 </li>
+<li>在(资源管理器)地址栏输入wt 回车</li>
+</ol>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Typora完全使用教程</title>
     <url>/post/9eac314.html</url>
     <content><![CDATA[<h2 id="一、Typora基本语法指南"><a href="#一、Typora基本语法指南" class="headerlink" title="一、Typora基本语法指南"></a>一、Typora基本语法指南</h2><h3 id="Typora简介"><a href="#Typora简介" class="headerlink" title="Typora简介"></a>Typora简介</h3><p>Typora是一款轻便简洁的Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。即时渲染使得你写Markdown就想是写Word文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。</p>
@@ -357,139 +493,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows Terminal 终极美化</title>
-    <url>/post/ec878511.html</url>
-    <content><![CDATA[<h4 id="安装-Window-Terminal"><a href="#安装-Window-Terminal" class="headerlink" title="安装 Window Terminal"></a>安装 Window Terminal</h4><p>有两种安装方式，这个要自行选择</p>
-<h5 id="git-安装"><a href="#git-安装" class="headerlink" title="git 安装"></a>git 安装</h5><p><del>前往 windows terminal 的地址下载，再使用vs2019 进行编译使用。我是拉了关天，没拉下来，放弃了。</del></p>
-<h5 id="商店安装"><a href="#商店安装" class="headerlink" title="商店安装"></a>商店安装</h5><p>在微软商店里搜windows terminal，安装即可。</p>
-<ol>
-<li><p>商店打不开的，自行解决，直接了当的方式就是升级系统到最新版本，重启。</p>
-</li>
-<li><p>提示当前所在的区域不支持的话 ： </p>
-<blockquote>
-<p>登录账号的进账号把自己所在区域地址改成美国，然后把系统时间设置成美国。重启</p>
-</blockquote>
-</li>
-</ol>
-<p>正常情况下，你会安装成功的。 可以继续往下看了，先放一张图：   </p>
-<p><img data-src="https://res.aimon.cc/img/20201201201321.jpeg" alt="钢铁侠"></p>
-<p>下面开工：</p>
-<h4 id="配置解释"><a href="#配置解释" class="headerlink" title="配置解释"></a>配置解释</h4><p>用到的就以下这些了，其他用不着的就不写了。 </p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      &quot;acrylicOpacity&quot;: 0.1, //背景透明度(0-1)</span><br><span class="line">      &quot;useAcrylic&quot;: true, // 启用毛玻璃</span><br><span class="line">      &quot;backgroundImage&quot;: &quot;D:/User/chuchur/OneDrive/图片/stack.jpg&quot;, //背景图片</span><br><span class="line">      &quot;backgroundImageOpacity&quot;: 0.1, //图片透明度（0-1）</span><br><span class="line">      &quot;experimental.retroTerminalEffect&quot;: true, //复古的CRT 效果</span><br><span class="line">      &quot;backgroundImageStretchMode&quot;: &quot;uniformToFill&quot;, //填充模式</span><br><span class="line">      &quot;icon&quot;: &quot;ms-appx:///ProfileIcons/&#123;9acb9455-ca41-5af7-950f-6bca1bc9722f&#125;.png&quot;, //图标</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 12, //文字大小</span><br><span class="line">      &quot;fontWeight&quot;: &quot;think&quot;, //文字宽度，可设置加粗</span><br><span class="line">      &quot;colorScheme&quot;: &quot;Solarized Dark&quot;, //主题名字</span><br><span class="line">      &quot;cursorColor&quot;: &quot;#FFFFFF&quot;, //光标颜色</span><br><span class="line">      &quot;cursorShape&quot;: &quot;bar&quot;, //光标形状</span><br><span class="line">      &quot;startingDirectory&quot;: &quot;D://Projects//&quot;, //起始目录</span><br><span class="line">      &quot;antialiasingMode&quot;: &quot;cleartype&quot; //消除文字锯齿</span><br><span class="line">    &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="复古的CRT-效果"><a href="#复古的CRT-效果" class="headerlink" title="复古的CRT 效果"></a>复古的CRT 效果</h4><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;experimental.retroTerminalEffect&quot;: true</span><br></pre></td></tr></table></figure>
-
-<p>先说说复古模式，这个设计初衷是好的，我怎么觉得是眼瞎模式呢，本来300瓦的近视，开启这种模式之后，瞬间到500瓦了。 i7十代的 16G的配置，开启这种模式之后，卡成狗。很烧性能，但是装个逼什么的还是可以的，真正用起来，不建议使用，可能还在摸索阶段吧，Bug 多。放个图：</p>
-<p><img data-src="https://res.aimon.cc/img/20201201201602.jpeg" alt="Window Terminal CRT"></p>
-<blockquote>
-<p>装逼专用配置😄</p>
-</blockquote>
-<h4 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h4><p>先安装Sarasa[更纱黑体] 字体 ，一会要使用的是Sarasa Term SC, 链接：点击 github 下载更纱黑体 嫌弃github慢的，右键这里下载在安装包找到Sarasa Term系列全部安装 安装完之后，在profiles.json文件 配置上字体 </p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">    &quot;defaults&quot;: &#123;</span><br><span class="line">      ....</span><br><span class="line">      &quot;fontFace&quot;: &quot;Sarasa Term SC&quot;, //字体</span><br><span class="line">      &quot;fontSize&quot;: 14, //文字大小</span><br><span class="line">      ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="权限设置"><a href="#权限设置" class="headerlink" title="权限设置"></a>权限设置</h4><p>因为执行Install-Module会报错以下信息：因为在此系统上禁止运行脚本。有关详细信息，先以管理员权限运行windows terminal，然后执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment">##允许执行脚本</span></span><br><span class="line"><span class="built_in">set-executionpolicy</span> remotesigned</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h4><h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> [<span class="type">moudel</span> <span class="type">name</span>] <span class="literal">-Scope</span> CurrentUser  <span class="comment">#只为当前用户安装</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>Post-Git和Git-Aliases可以实现类似oh-my-zsh一样的Git增强(命令别名和显示分支等信息) oh-my-posh提供 了非常漂亮的主题。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Install-Module git-aliases -AllowClobber</span><br><span class="line">Install-Module posh-git</span><br><span class="line">Install-Module oh-my-posh #</span><br><span class="line">Install-Module DirColors  #让 ls (Get-ChildItem) 像 Unix 系终端一样具有多彩色</span><br></pre></td></tr></table></figure>
-
-<p>oh-my-posh提供了10款漂亮的主题供我们选择。</p>
-<p> Agnoster,Avit,Darkblood,Fish,Honukai,Paradox,PowerLine,robbyrussell,Sorin,tehrob </p>
-<p>可以使用Set-Theme [主题名]配置主题</p>
-<h5 id="加载模块和设置主题"><a href="#加载模块和设置主题" class="headerlink" title="加载模块和设置主题"></a>加载模块和设置主题</h5><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> DirColors</span><br><span class="line"><span class="built_in">Import-Module</span> posh<span class="literal">-git</span></span><br><span class="line"><span class="built_in">Import-Module</span> <span class="built_in">oh</span><span class="literal">-my</span><span class="literal">-posh</span></span><br><span class="line"><span class="built_in">Import-Module</span> git<span class="literal">-aliases</span> <span class="literal">-DisableNameChecking</span></span><br><span class="line"><span class="built_in">Set-Theme</span> PowerLine</span><br></pre></td></tr></table></figure>
-
-<h4 id="保存配置，永久生效"><a href="#保存配置，永久生效" class="headerlink" title="保存配置，永久生效"></a>保存配置，永久生效</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PROFILE    # 输入此命令，$符号也要一起，查看配置文件的全路径</span><br></pre></td></tr></table></figure>
-
-<p>正常情况 ，你会看到 C:\Users[your name]\Documents\WindowsPowerShell\Microsoft. PowerShell_profile.ps1 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">code $PROFILE  # 输入此命令,使用 vscode 打开(或创建)配置文件, notepad 也可以</span><br></pre></td></tr></table></figure>
-
-<p>在打开的Microsoft.PowerShell_profile.ps1, 保存以下配置 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module DirColors</span><br><span class="line">Import-Module posh-git</span><br><span class="line">Import-Module oh-my-posh</span><br><span class="line">Import-Module git-aliases -DisableNameChecking</span><br><span class="line">Set-Theme PowerLine</span><br></pre></td></tr></table></figure>
-
-<h4 id="主题颜色美化"><a href="#主题颜色美化" class="headerlink" title="主题颜色美化"></a>主题颜色美化</h4><h5 id="使用官方的colortool"><a href="#使用官方的colortool" class="headerlink" title="使用官方的colortool"></a>使用官方的colortool</h5><p>安装 colortool </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scoop install colortool</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>scoop 安装请参见windows 10 包管理</p>
-</blockquote>
-<p>colortool 的相关命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c --current：打印当前应用方案的颜色表</span><br><span class="line">-q --quiet：使用后不要打印颜色表</span><br><span class="line">-e --errors：在控制台上报告方案分析错误</span><br><span class="line">-d --defaults：仅将方案应用于注册表中的默认值</span><br><span class="line">-b --both：将方案同时应用于当前控制台和默认控制台。</span><br><span class="line">-x --xterm：使用VT序列设置颜色。用于设置WSL中的颜色。仅适用于Windows版本&gt;=17048。</span><br><span class="line">-s --schemes：显示所有可用的方案</span><br><span class="line">-l --location：显示schemes目录的完整路径</span><br><span class="line">-v --version：显示版本号</span><br><span class="line">-o --output&lt;filename&gt;：将当前颜色表输出到文件（以.ini格式）</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>-是缩写，–是全写 </p>
-</blockquote>
-<p>使用colortool -s看到 也提供了 8 套配色方案:</p>
-<ul>
-<li>campbell-legacy.ini </li>
-<li>campbell.ini </li>
-<li>cmd-legacy.ini </li>
-<li>deuteranopia.itermcolors </li>
-<li>OneHalfDark.itermcolors </li>
-<li>OneHalfLight.itermcolors </li>
-<li>solarized_dark.itermcolors </li>
-<li>solarized_light.itermcolors </li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">colortool -b OneHalfDark.itermcolors</span><br></pre></td></tr></table></figure>
-
-<p>将OneHalfDark.itermcolors主题应用到当前控制台 ,Mac使用惯了， 你也可以来一波自定义的方案</p>
-<h5 id="手动配色"><a href="#手动配色" class="headerlink" title="手动配色"></a>手动配色</h5><p>就是用iterm2的主题颜色吧，人家都已经写好了。直接使用就是了 打开 iTerm2-Color-Schemes, 找到配色的.json文件，把里面的配色复制到schemes下面就可以了。我这里选了两款Solarized的主题，</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;:&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;,</span><br><span class="line">&quot;schemes&quot;:[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Dark&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#002831&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#d11c24&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#738a05&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#a57706&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2176c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#c61c6f&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#259286&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#eae3cb&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#bd3613&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#475b62&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#536870&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#708284&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#5956ba&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#819090&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#fcf4dc&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#001e27&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#708284&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Solarized Darcula&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;black&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;red&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;green&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;yellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;blue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;purple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;cyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;white&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlack&quot;</span>: <span class="string">&quot;#25292a&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightRed&quot;</span>: <span class="string">&quot;#f24840&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightGreen&quot;</span>: <span class="string">&quot;#629655&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightYellow&quot;</span>: <span class="string">&quot;#b68800&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightBlue&quot;</span>: <span class="string">&quot;#2075c7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightPurple&quot;</span>: <span class="string">&quot;#797fd4&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightCyan&quot;</span>: <span class="string">&quot;#15968d&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;brightWhite&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;background&quot;</span>: <span class="string">&quot;#3d3f41&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;foreground&quot;</span>: <span class="string">&quot;#d2d8d9&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>到此美化就收工了。</p>
-<h4 id="分屏-多窗格-缩放"><a href="#分屏-多窗格-缩放" class="headerlink" title="分屏/ 多窗格 / 缩放"></a>分屏/ 多窗格 / 缩放</h4><p>他可以像 Item2 一样 在同一 Tab 下 分屏，如下图： </p>
-<p><img data-src="https://res.aimon.cc/img/20201201221316.jpeg" alt="多窗格"></p>
-<p>分屏快捷键如下： </p>
-<p>水平分屏：Alt + Shift + 减号 </p>
-<p>垂直分屏：Alt + Shift + 加号 </p>
-<p>切换聚焦的分屏视图：alt + (left/right/up/down) </p>
-<p>调节分屏的窗口大小：alt + shift + (left/right/up/down) </p>
-<p>缩放当前视图：Ctrl+ 加号/减号 （或者 Ctrl + 鼠标滚轮） </p>
-<blockquote>
-<p>那我不想分屏，我要删掉一个怎么办？ 这个问题问的好，直接输入exit即可退出分屏 著作权归作者所有。</p>
-</blockquote>
-<h4 id="PowerShell-的更新"><a href="#PowerShell-的更新" class="headerlink" title="PowerShell 的更新"></a>PowerShell 的更新</h4><p>自带的 PS 版本　是 5.0 的 ，可以升级到更高版本， 目前稳定版本为 7.x </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$PSVersionTable.PSVersion.Major   #查看Powershell版本</span><br><span class="line">$PSVersionTable.CLRVersion.Major  #查看.NET Framework版本</span><br></pre></td></tr></table></figure>
-
-<p>在<a href="https://github.com/PowerShell/PowerShell/releases">这里</a>找到**x64.msi,下载安装即可。</p>
-<h4 id="关于-ssh-的配置"><a href="#关于-ssh-的配置" class="headerlink" title="关于 ssh 的配置"></a>关于 ssh 的配置</h4><h5 id="新建-config-文件"><a href="#新建-config-文件" class="headerlink" title="新建 config 文件"></a>新建 config 文件</h5><p>在.ssh目录（就是你的.pub 默认生成位置, 通常是C:\Users[your name].ssh），新建一个config文件，没有后缀，内容：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host          aliyun</span><br><span class="line">HostName      192.168.1.1</span><br><span class="line">Port          22</span><br><span class="line">User          root</span><br><span class="line">IdentityFile  C:&#x2F;Users&#x2F;[your name]&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>IdentityFile 是 ssh 的 key，你要自己生成。</p>
-<h5 id="配置-profiles-json"><a href="#配置-profiles-json" class="headerlink" title="配置 profiles.json"></a>配置 profiles.json</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;9a138488-58fc-4a7a-b3c2-3af9ba5bc7bb&#125;&quot;</span>, <span class="comment">//这个你要自己生成</span></span><br><span class="line">      <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;ssh aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;aliyun&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;aliyun-Linux&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.guidgen.com/">在这里可以在线生成 GUID</a> </p>
-<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>直接执行： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh aliyun</span><br></pre></td></tr></table></figure>
-
-<p>这样就直接登录阿里云了。</p>
-<h4 id="关于-bash-的配置"><a href="#关于-bash-的配置" class="headerlink" title="关于 bash 的配置"></a>关于 bash 的配置</h4><h5 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h5><p>依次打开–控制面板–系统和安全—系统—-高级系统设置, 找不到就 输命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">control system</span><br></pre></td></tr></table></figure>
-
-<p>系统属性—高级—环境变量—系统变量，找到Path变量，编辑，新建一个，把git的bin路径加进去，(如D:\Program files\git\bin)，一路保存就可以了。</p>
-<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;profiles&quot;: &#123;</span><br><span class="line">  &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// Make changes here to the powershell.exe profile</span></span><br><span class="line">        <span class="attr">&quot;guid&quot;</span>: <span class="string">&quot;&#123;0caa0dad-35be-5f56-a8ff-afceeeaa6109&#125;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;tabTitle&quot;</span>: <span class="string">&quot;bash&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;commandline&quot;</span>: <span class="string">&quot;bash.exe&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;closeOnExit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;fontFace&quot;</span>: <span class="string">&quot;Sarasa Term SC&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;hidden&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;snapOnInput&quot;</span>: <span class="literal">true</span>, <span class="comment">// 捕捉输入</span></span><br><span class="line">        <span class="comment">// &quot;startingDirectory&quot;: &quot;%USERPROFILE%&quot;</span></span><br><span class="line">        <span class="attr">&quot;startingDirectory&quot;</span>: <span class="string">&quot;d://Projects//dobo&quot;</span></span><br><span class="line">      &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上就配置完成了，你新建 bash 标签。就可以使用 bash 了。</p>
-<h4 id="鼠标右键菜单的配置"><a href="#鼠标右键菜单的配置" class="headerlink" title="鼠标右键菜单的配置"></a>鼠标右键菜单的配置</h4><p>这个需要改注册表来完成 新建一个文件wt.reg，内容如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt]</span><br><span class="line">@=<span class="string">&quot;贾维斯,来个命令窗口&quot;</span></span><br><span class="line"><span class="string">&quot;Icon&quot;</span>=<span class="string">&quot;D:\\User\\chuchur\\OneDrive\\图片\\wt.ico&quot;</span></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\wt\command]</span><br><span class="line">@=<span class="string">&quot;C:\\Users\\chuchur\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>第一个@ 是菜单项的名字，下面那个Icon 就是菜单项的图标，也可以不要，第二个@就是点击要执行的程序。 </p>
-<blockquote>
-<p>从商店安装的叫wt.exe， 自行编译的叫wtd.exe。 这个还是得区分下</p>
-</blockquote>
-<p>保存，然后双击执行wt.reg，导入注册表，就完事了。</p>
-<h4 id="快捷执行方式"><a href="#快捷执行方式" class="headerlink" title="快捷执行方式"></a>快捷执行方式</h4><ol>
-<li>写在以上，搞定鼠标右键 </li>
-<li>Win+R 输入wt ，回车 </li>
-<li>在(资源管理器)地址栏输入wt 回车</li>
-</ol>
-]]></content>
+    <title>测试文章</title>
+    <url>/post/7a6a6b5a.html</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>其他</category>
+        <category>技术</category>
       </categories>
       <tags>
-        <tag>其他</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -526,17 +537,6 @@
       </categories>
       <tags>
         <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试文章</title>
-    <url>/post/7a6a6b5a.html</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -605,6 +605,248 @@
 <p><img data-src="https://res.aimon.cc/img/20201202143937.png" alt="img"></p>
 <blockquote>
 <p> 转自 <a href="https://www.cnblogs.com/yaopengfei/p/12449213.html">https://www.cnblogs.com/yaopengfei/p/12449213.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>coding</category>
+        <category>c#</category>
+      </categories>
+      <tags>
+        <tag>c#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>.NET5部署到Linux</title>
+    <url>/post/af369074.html</url>
+    <content><![CDATA[<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><h5 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h5><p>操作系统可选择你比较熟悉的Linux发行版，如果你是第一次接触Linux，那我推荐使用CentOs，因为本文的内容都是在CentOs中进行演示的。</p>
+<p>至于系统的安装，你可以选择云服务器，或者使用虚拟机安装。虚拟机安装CentOs的方式比较简单，在此就不赘述了。</p>
+<h5 id="连接工具"><a href="#连接工具" class="headerlink" title="连接工具"></a>连接工具</h5><p>笔者推荐使用XSHELL作为连接工具，下载地址：<a href="https://www.netsarang.com/zh/xshell-download/">https://www.netsarang.com/zh/xshell-download/</a></p>
+<p>安装完成后，打开软件，点击左上角的新建回话按钮，打开新建回话框，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150421.png" alt="20201105201340"></p>
+<p>在【主机】中填写服务器的ip地址，然后点击【连接】按钮，会依次提示输入用户名和密码。连接成功的界面如下所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150422.png" alt="20201105201748"></p>
+<h5 id="文件上传工具"><a href="#文件上传工具" class="headerlink" title="文件上传工具"></a>文件上传工具</h5><p>要想把服务部署到Linux服务器，那就必须把文件传输到服务器中（这是句废话）。根据不同的使用场景，笔者推荐两种方案，分别是XFTP工具上传和git仓库中转。</p>
+<p>使用XFTP上传的方式需要在开发的机器上安装此工具，下载地址：<a href="https://www.netsarang.com/zh/xftp-download/">https://www.netsarang.com/zh/xftp-download/</a></p>
+<p>安装完成后，可以通过XSHELL一键打开XFTP，XFTP打开后，在软件的右侧可以切换要上传文件的目标路径，然后将文件拖到右侧释放后，就会自动上传了，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150423.gif" alt="a1"></p>
+<p>使用git仓库进行中转的方式是笔者比较推荐的方式，因为在频繁的迭代更新中，如果通过现在本地编译发布后，再将文件拷贝到服务器，这个操作流程稍显繁琐。而通过git仓库周转的方式则相对比较简单，开发者仅需要将开发好的代码推到git仓库，然后在服务器中执行build，publish等操作，少了繁琐的拷贝文件的过程，同时由于build和publish都是在服务器中执行，那么我们就可以通过编写部署脚本的方式，可以最终实现一键快速部署。</p>
+<p>使用git的方案需要在服务器安装git客户端，并配置ssh公钥（配置公钥的目的是拉取私有的仓库，公共参考无需配置公钥）。下面来看具体的操作步骤：</p>
+<p>首先，执行如下命令，安装git客户端：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
+
+<p>git安装后，通过如下命令生成sshkey:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 这里的xx@xxx.com只是生成的sshkey的名称，并不约束货要求具体命名为某个邮箱。</span></span><br><span class="line">ssh-keygen -t rsa -C &quot;xx@xxx.com&quot;  </span><br></pre></td></tr></table></figure>
+
+<p>按照提示，按三次回车，即可生成sshkey，如下图所示：<br><img data-src="https://res.aimon.cc/img/20201204150424.png" alt="20201105212252"></p>
+<p>，通过如下命令可查看公钥：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>复制生成后的sshkey，配置到代码仓库的公钥中。下面简单演示下gitee代码托管平台下如何配置公钥（其他平台大同小异）。</p>
+<p>进入私有仓库的【管理】页面，找到【公钥管理】，点击【添加公钥】，将刚刚生成的公钥复制过去，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150425.png" alt="20201105213004"></p>
+<p>添加后，在终端中输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T git@gitee.com</span><br></pre></td></tr></table></figure>
+
+<p>次使用需要确认并添加主机到本机SSH可信列表，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150426.png" alt="20201105213248"></p>
+<p>输入yes后，出现类似于Hi xxx的字样，则表示git公钥配置成功了。</p>
+<h5 id="NET-Core-SDK和运行时"><a href="#NET-Core-SDK和运行时" class="headerlink" title=".NET Core SDK和运行时"></a>.NET Core SDK和运行时</h5><p>.NET运行时是.NET程序运行的先决条件，而SDK并不是必须的，但如果通过git方式进行文件中转的话，就涉及到在服务器端进行编译，所以SDK也需要安装。（<em>注：docker部署方式无需在服务器安装SDK和运行时，下文回提到</em>）<br>下面一起看看在CentOs中如何安装SDK和运行时（其他环境可参考官方文档：<a href="https://docs.microsoft.com/zh-cn/dotnet/core/install/linux%EF%BC%89%E3%80%82">https://docs.microsoft.com/zh-cn/dotnet/core/install/linux）。</a></p>
+<p>运行如下命令，将 Microsoft 包签名密钥添加到受信任密钥列表，并添加 Microsoft 包存储库。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span><br></pre></td></tr></table></figure>
+
+<p>通过如下命令安装SDK:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install -y dotnet-sdk-3.1</span><br></pre></td></tr></table></figure>
+
+<p>.NET Core SDK 使你可以通过 .NET Core 开发应用。 如果安装 .NET Core SDK，则无需安装相应的运行时。</p>
+<p>通过如下命令安装运行时：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install -y aspnetcore-runtime-3.1</span><br></pre></td></tr></table></figure>
+
+<p>注：上述命令中的最后的3.1表示的是版本号，如果安装其他版本，修改对应的版本号即可。参考资料：<a href="https://dotnet.microsoft.com/download/dotnet-core">https://dotnet.microsoft.com/download/dotnet-core</a></p>
+<h4 id="发布程序到服务器"><a href="#发布程序到服务器" class="headerlink" title="发布程序到服务器"></a>发布程序到服务器</h4><p>在准备工作中已经介绍了两种将文件发布到服务器的方式，下面具体演示下步骤。</p>
+<h5 id="通过XFTP发布到服务器"><a href="#通过XFTP发布到服务器" class="headerlink" title="通过XFTP发布到服务器"></a>通过XFTP发布到服务器</h5><p>首先，准备好要发布的程序，<br>下图是我创建的一个.NET Core3.1的示例代码：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150427.png" alt="20201106132910"></p>
+<p>打开vs的程序包管理器控制台，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">dotnet publish -o ./publish</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150428.png" alt="20201106133127"></p>
+<p>在上图可以看到，发布之后的文件的路径为：D:\code\test\BuildTest\publish\</p>
+<p>打开XFTP，将publish文件夹拖到右侧窗口，即可完成上传。</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150429.gif" alt="a2"></p>
+<h5 id="通过git中转。"><a href="#通过git中转。" class="headerlink" title="通过git中转。"></a>通过git中转。</h5><p>首先，将代码推送到git仓库中，复制SSH地址。如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150430.png" alt="20201106141159"></p>
+<p>然后再服务器中，执行克隆命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir code</span><br><span class="line">cd code</span><br><span class="line">git clone git@gitee.com:billsking/build-test.git</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150431.png" alt="20201106141435"></p>
+<p>此时项目代码已经下载到服务器中，切换工作到解决方案所在的目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd build-test</span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要执行dotnet publish命令对程序进行编译发布。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">dotnet publish -o /root/web/publish</span><br></pre></td></tr></table></figure>
+
+<p>执行完毕后，编译后的文件将被保存在/root/web/publish目录中。将工作目录切换到/root/web/publish，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">dotnet BuildTest.dll</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150432.png" alt="20201106143301"></p>
+<p>到这里为止，咱们的程序已经在linux服务器运行起来了。但直接通过dotnet命令仅适合临时测试使用，并不能成为生产场景的解决方案。下面进来跟我一起了解下可用于生产环境的部署方式吧。</p>
+<h4 id="Supervisor-Nginx组合"><a href="#Supervisor-Nginx组合" class="headerlink" title="Supervisor+Nginx组合"></a>Supervisor+Nginx组合</h4><p>Supervisor是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。下面是Supervisor安装方法。<br>执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y supervisor</span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码如果提示：没有可用软件包 supervisor。则需要先安装EPEL源后，再执行上面的命令。安装EPEL源的命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<p>设置开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl enable supervisord</span><br></pre></td></tr></table></figure>
+
+<p>启动supervisord</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start supervisord</span><br></pre></td></tr></table></figure>
+
+<p>查看状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl status supervisord</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150433.png" alt="20201106150000"></p>
+<p>通过vi命令或者XFTP修改配置文件开启web界面访问，如下图所示，分别取消inet_http_server等四个配置的注释：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150434.png" alt="20201106150527"></p>
+<p>执行如下命令，重新加载配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure>
+
+<p>然后在浏览器打开http://你的ip:9001，输入用户名密码后，如图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150435.png" alt="20201106151109"></p>
+<p>看到这个界面，就表示supervisor安装完成了。</p>
+<p>切换到/etc/supervisord.d目录，在此目录创建ini文件，内容如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[program:buildtest] ;表示程序名称，用于在supervisor中显示，无特殊意义。</span><br><span class="line">command&#x3D;&#x2F;bin&#x2F;bash -c &quot;dotnet BuildTest.dll&quot;; 输入执行命令，这里表示执行的是dotnet BuildTest.dll</span><br><span class="line">directory&#x3D;&#x2F;root&#x2F;web&#x2F;publish ; 应用程序根目录 </span><br><span class="line">autostart&#x3D;true ; 是否自动启动，当 supervisor 加载该配置文件的时候立即启动它 </span><br><span class="line">autorestart&#x3D;true ; 是否自动重启， 程序异常退出后自动重启</span><br><span class="line">logfile_maxbytes&#x3D;50MB ; 该配置文件输出单个日志文件的大小，默认50M</span><br><span class="line">logfile_backups&#x3D;10 ; 日志备份个数 </span><br><span class="line">loglevel&#x3D;info ; 记录日志级别 </span><br><span class="line">stdout_logfile&#x3D;&#x2F;root&#x2F;data&#x2F;logs&#x2F;buildtest&#x2F;buildtest.out.log ; 指定标准输出日志文件 </span><br><span class="line">environment&#x3D;ASPNETCORE_ENVIRONMENT&#x3D;Production;环境变量。</span><br><span class="line">user&#x3D;root ;启动服务的用户  </span><br><span class="line">redirect_stderr&#x3D;true;把 stderr 重定向到 stdout，默认 false</span><br></pre></td></tr></table></figure>
+
+<p>++注：stdout_logfile指向的文件夹一定要先创建，否则无法启动。++</p>
+<p>然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure>
+
+<p>命令执行成功后， 刷新浏览器，可以看到如下界面：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150436.png" alt="20201109100404"></p>
+<p>当界面显示running时，则表示我们我们刚刚配置的应用程序运行起来了。</p>
+<p>但现在还存在一个问题，我们的应用程序默认是绑定的5000端口，如果要指定80端口或者配置域名该怎么处理呢？下面就该nginx登场了。</p>
+<p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。（来源自百度百科）</p>
+<p>安装方式参考：<a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a></p>
+<p>安装先决条件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<p>设置yum存储库，先创建一下内容的文件：/etc/yum.repos.d/nginx.repo</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[nginx-stable]</span></span><br><span class="line"><span class="attr">name</span>=nginx stable repo</span><br><span class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://nginx.org/keys/nginx_signing.key</span><br><span class="line"><span class="attr">module_hotfixes</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[nginx-mainline]</span></span><br><span class="line"><span class="attr">name</span>=nginx mainline repo</span><br><span class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/mainline/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://nginx.org/keys/nginx_signing.key</span><br><span class="line"><span class="attr">module_hotfixes</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，使用稳定 nginx 包的存储库。如果要使用主线 nginx 包，请运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum-config-manager --enable nginx-mainline</span><br></pre></td></tr></table></figure>
+
+<p>运行如下命令安装nginx：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<p>设置开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure>
+
+<p>启动nginx：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+
+<p>此时，就可以在浏览器通过ip访问了：<a href="http://你的ip/">http://你的ip</a>，界面如下：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150437.png" alt="20201109101553"></p>
+<p>nginx安装完成后，切换到/etc/nginx/conf.d目录，修改default.conf文件内容，如下所示：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://0.0.0.0:5000;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    <span class="attr">location</span> = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存后，执行如下命令，重新加载配置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>然后再次访问http://你的ip，幸运的话，你应该可以看到如下的界面，表示你的.NET Core程序已经完美运行在linux系统了。</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150438.png" alt="20201109111932"></p>
+<p>如果你不幸的看到了如下界面：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150439.png" alt="20201109112035"></p>
+<p>不要着急，继续往下看。</p>
+<p>出现这个问题的原因是因为SeLinux的限制，执行如下命令之后，再刷新页面：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">setenforce 0     </span><br></pre></td></tr></table></figure>
+
+<p>如果还是看到的错误页面，就需要去查看nginx的日志了，默认的日志路径为：/var/log/nginx</p>
+<p>通过setenforce 0命令，只是临时实效，重启后回失效的。一劳永逸的做法是，修改/etc/selinux/config 文件，　将<strong>SELINUX=enforcing改为SELINUX=disabled</strong>，然后重启机器。</p>
+<p>后面如果你需要更新你的应用程序，只需要将代码提交到git仓库，然后在服务器中执行git pull和dotnet publish就行了。</p>
+<p>如果你对shell比较熟悉的话，还可以通过编写shell命令一键执行应用程序的更新，下面是我写的示例：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/bin/bash</span></span><br><span class="line">cd /root/code/build-test</span><br><span class="line">git pull</span><br><span class="line">dotnet publish -o /root/web/publish</span><br><span class="line">supervisorctl restart buildtest</span><br></pre></td></tr></table></figure>
+
+<p>将上述的代码保存问sh文件，上传到服务器，并设置权限。如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150440.png" alt="20201109142811"></p>
+<p>代码提交到git仓库后，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./build.sh</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150441.png" alt="20201109143151"></p>
+<p>总结一下，这种方式需要在服务端安装两个软件，supervisor和nginx，supervisor一个作为守护线程，用于维护应用程序的生命周期的。nginx则是作为反向代理使用。维护起来相对麻烦，那么有没有一个像IIS一样，既可以维护应用程序的生命周期，又可以对外暴露服务呢？答案是肯定的，继续往下看。</p>
+<p>Jexus</p>
+<blockquote>
+<p>　　Jexus是一款Linux平台上的高性能WEB服务器和负载均衡网关服务器，以支持ASP.NET、ASP.NET CORE、PHP为特色，同时具备反向代理、入侵检测等重要功能。可以这样说，Jexus是.NET、.NET CORE跨平台的最优秀的宿主服务器，如果我们认为它是Linux平台的IIS，这并不为过，因为，Jexus不但非常快，而且拥有IIS和其它Web服务器所不具备的高度的安全性。同时，Jexus Web Server 是完全由中国人自主开发的的国产软件，真正做到了“安全、可靠、可控”， 具备我国党政机关和重要企事业单位信息化建设所需要的关键品质。</p>
+</blockquote>
+<p>以上内容摘自jexus官网：<a href="https://www.jexus.org/">https://www.jexus.org/</a></p>
+<p>废话不多说，直接进入正题，首先是安装。</p>
+<p>jexus的安装非常简单，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://jexus.org/release/x64/install.sh|sudo sh</span><br></pre></td></tr></table></figure>
+
+<p>注：如果在这之前你已经安装了nginx，需要先将nginx绑定的80端口释放，或者卸载nginx。</p>
+<p>安装完成后，切换到/usr/jexus目录，修改/usr/jexus/siteconf目录下的default，内容如下所示：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">port</span>=<span class="number">80</span> <span class="comment">#端口</span></span><br><span class="line"><span class="attr">hosts</span>=*    <span class="comment">#域名</span></span><br><span class="line"><span class="attr">AppHost</span>=&#123;cmd=dotnet BuildTest.dll<span class="comment">; root=/root/web/publish; port=0&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/jexus/jws restart</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150442.png" alt="20201109162034"></p>
+<p>当你看到执行结果为OK时，即可认为应用程序已经启动了。最后，执行如下命令，看下执行的结果：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -aux</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150443.png" alt="20201109162246"></p>
+<p>关于jexus更详细的使用说明，请参考官方文档。</p>
+<p>Docker+Nginx或Jexus</p>
+<p>上面讲到的， 不管是通过supervisor+nginx还是jexus，都需要在服务器安装 .NET Core的SDK或者运行时，假如咱们有好多个应用程序，有的用 .NET Core2.1，有的用 .NET Core3.1，有的用.NET5，那么上面的做法就需要咱们分别安装对应的SDK或者运行时，对于维护还是比较麻烦的。Docker的出现，可以完美解决上述问题。</p>
+<p>关于Docker的介绍，有兴趣的可自行百度。下面来跟我一起来看下如何安装并使用Docker。</p>
+<p>执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>执行这个命令后，脚本就会自动的将一切准备工作做好，并且把Docker的稳定版本安装在系统中。</p>
+<p>执行如下命令设置docker开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<p>执行如下命令启动docker:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>安装docker之后，我们需要在代码里增加dockerfile文件。什么？不会docker？不要紧，万能的Visual Studio可以帮你自动生成。在解决方案中，右击项目名称，依次选择【添加】，【Docker支持】，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150444.png" alt="20201109165524"></p>
+<p>生成的dockerfile文件如下所示：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base</span><br><span class="line">WORKDIR /app</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build</span><br><span class="line">WORKDIR /src</span><br><span class="line">COPY [&quot;BuildTest/BuildTest.csproj&quot;, &quot;BuildTest/&quot;]</span><br><span class="line">RUN dotnet restore &quot;BuildTest/BuildTest.csproj&quot;</span><br><span class="line">COPY . .</span><br><span class="line">WORKDIR &quot;/src/BuildTest&quot;</span><br><span class="line">RUN dotnet build &quot;BuildTest.csproj&quot; -c Release -o /app/build</span><br><span class="line"></span><br><span class="line">FROM build AS publish</span><br><span class="line">RUN dotnet publish &quot;BuildTest.csproj&quot; -c Release -o /app/publish</span><br><span class="line"></span><br><span class="line">FROM base AS final</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY --from=publish /app/publish .</span><br><span class="line">ENTRYPOINT [&quot;dotnet&quot;, &quot;BuildTest.dll&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>将代码推送到git仓库，然后再linux服务器中拉取最新代码。</p>
+<p>切换到/root/code/build-test目录，执行如下命令，拉取最新代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>然后执行如下命令，将代码打包为镜像：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -f ./BuildTest/Dockerfile -t buildtest .</span><br></pre></td></tr></table></figure>
+
+<p>由于首次打包镜像的时候涉及到拉取.NET Core的官方镜像，拉取速度可能较慢，请耐心等待。打包完成后，执行如下命令，可查看当前服务器已存在的镜像：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150445.png" alt="20201109170929"></p>
+<p>镜像打包完成后，我们就可以通过docker run运行下，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -p 82:80 -dit --restart=always --name buildtest buildtest</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150446.png" alt="20201109171049"></p>
+<p>通过浏览器访问：<a href="http://ip:82/">http://ip:82</a>。如无意外，你将看到你的应用程序已经成功运行了。</p>
+<p>相同的道理，我们也是可以通过编写shell脚本的方式，实现一键更新应用程序的。在/root目录中，创建dockerbuild.sh文件，文件内容如下：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/bin/bash</span></span><br><span class="line"></span><br><span class="line">cd /root/code/build-test</span><br><span class="line">git pull</span><br><span class="line"><span class="attr">imtag</span>=$(uuidgen |sed <span class="string">&#x27;s/-//g&#x27;</span>)</span><br><span class="line">docker build -f ./BuildTest/Dockerfile -t buildtest:$&#123;imtag&#125; .</span><br><span class="line">docker stop buildtest</span><br><span class="line">docker rm buildtest</span><br><span class="line">docker run -dit --restart=always --name buildtest -p 82:80  buildtest:$&#123;imtag&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给dockerbuild.sh文件设置执行权限，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 777 dockerbuild.sh</span><br></pre></td></tr></table></figure>
+
+<p>当有新代码推送到git仓库时，进入服务器，执行dockerbuild.sh即可快速更新应用程序。</p>
+<p>到这里，.NET Core部署到linux服务器的方案已“基本”介绍完毕了。</p>
+<p>为什么说是“基本”呢？不知道大家有没有发现，虽然目前的方案可以实现一键部署更新，但。。。。，我们还是需要登陆到linux服务器去执行这个命令，显然，这不是最好的方法。有没有更好的方案呢？如果当我们提交给git仓库后，自动出发部署命令是不是就更方便了呢？</p>
+<p>答案是肯定的，我们可以借助jenkins来实现。限于篇幅，本篇文章就不讲解了，如有兴趣，你也可以先自行研究，或者敬请期待下次的讲解。</p>
+<p>最后说明下，以上的方案还是存在很多的问题，对于小型团队已经够用，大型项目的终极解决方案应该是基于k8s实现的devops。其实k8s实现devops的原理和我上述介绍的方案基本一致。借助与gitlab的runner或者jenkins，监听git仓库的状态，当发现指定的分支发生变化后，打包镜像，然后通过替换k8s的deployment的镜像来实现自动更新。同时，k8s实现了弹性伸缩、滚动更新等功能。</p>
+<blockquote>
+<p>转自：<a href="https://www.cnblogs.com/fulu/p/13983734.html#!comments">https://www.cnblogs.com/fulu/p/13983734.html#!comments</a></p>
 </blockquote>
 ]]></content>
       <categories>

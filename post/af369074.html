@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+  <script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.aimon.cc","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"bounceInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="准备工作操作系统操作系统可选择你比较熟悉的Linux发行版，如果你是第一次接触Linux，那我推荐使用CentOs，因为本文的内容都是在CentOs中进行演示的。 至于系统的安装，你可以选择云服务器，或者使用虚拟机安装。虚拟机安装CentOs的方式比较简单，在此就不赘述了。 连接工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".NET5部署到Linux">
+<meta property="og:url" content="https://www.aimon.cc/post/af369074.html">
+<meta property="og:site_name" content="六月的雨">
+<meta property="og:description" content="准备工作操作系统操作系统可选择你比较熟悉的Linux发行版，如果你是第一次接触Linux，那我推荐使用CentOs，因为本文的内容都是在CentOs中进行演示的。 至于系统的安装，你可以选择云服务器，或者使用虚拟机安装。虚拟机安装CentOs的方式比较简单，在此就不赘述了。 连接工具">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150421.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150422.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150423.gif">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150424.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150425.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150426.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150427.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150428.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150429.gif">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150430.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150431.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150432.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150433.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150434.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150435.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150436.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150437.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150438.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150439.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150440.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150441.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150442.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150443.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150444.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150445.png">
+<meta property="og:image" content="https://res.aimon.cc/img/20201204150446.png">
+<meta property="article:published_time" content="2020-12-04T06:56:32.000Z">
+<meta property="article:modified_time" content="2020-12-04T07:14:54.440Z">
+<meta property="article:author" content="aimon">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.aimon.cc/img/20201204150421.png">
+
+
+<link rel="canonical" href="https://www.aimon.cc/post/af369074.html">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>.NET5部署到Linux | 六月的雨</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+    
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">六月的雨</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">山水一程，三生有幸。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-coding">
+
+    <a href="/categories/coding" rel="section"><i class="fa fa-code fa-fw"></i>编程</a>
+
+  </li>
+        <li class="menu-item menu-item-essay">
+
+    <a href="/essay/notes.html" rel="section"><i class="fa fa-bookmark fa-fw"></i>备忘录</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text">连接工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%B7%A5%E5%85%B7"><span class="nav-number">1.3.</span> <span class="nav-text">文件上传工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NET-Core-SDK%E5%92%8C%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">1.4.</span> <span class="nav-text">.NET Core SDK和运行时</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%A8%8B%E5%BA%8F%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">发布程序到服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87XFTP%E5%8F%91%E5%B8%83%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">通过XFTP发布到服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87git%E4%B8%AD%E8%BD%AC%E3%80%82"><span class="nav-number">2.2.</span> <span class="nav-text">通过git中转。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Supervisor-Nginx%E7%BB%84%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">Supervisor+Nginx组合</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="aimon"
+      src="https://res.aimon.cc/img/avatar2.jpg">
+  <p class="site-author-name" itemprop="name">aimon</p>
+  <div class="site-description" itemprop="description">我喜欢三月的风、六月的雨、不落的太阳、最好的你</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mqzzzz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mqzzzz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:mqzzzz@qq.com" title="E-Mail → mailto:mqzzzz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </section>
+      </div>
+    
+        <div>
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="50" src="//music.163.com/outchain/player?type=2&id=4875310&auto=1&height=32"></iframe>
+        </div>
+    
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.aimon.cc/post/af369074.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://res.aimon.cc/img/avatar2.jpg">
+      <meta itemprop="name" content="aimon">
+      <meta itemprop="description" content="我喜欢三月的风、六月的雨、不落的太阳、最好的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="六月的雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          .NET5部署到Linux
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-04 14:56:32 / 修改时间：15:14:54" itemprop="dateCreated datePublished" datetime="2020-12-04T14:56:32+08:00">2020-12-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/coding/" itemprop="url" rel="index"><span itemprop="name">coding</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/coding/c/" itemprop="url" rel="index"><span itemprop="name">c#</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><h5 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h5><p>操作系统可选择你比较熟悉的Linux发行版，如果你是第一次接触Linux，那我推荐使用CentOs，因为本文的内容都是在CentOs中进行演示的。</p>
+<p>至于系统的安装，你可以选择云服务器，或者使用虚拟机安装。虚拟机安装CentOs的方式比较简单，在此就不赘述了。</p>
+<h5 id="连接工具"><a href="#连接工具" class="headerlink" title="连接工具"></a>连接工具</h5><p>笔者推荐使用XSHELL作为连接工具，下载地址：<a target="_blank" rel="noopener" href="https://www.netsarang.com/zh/xshell-download/">https://www.netsarang.com/zh/xshell-download/</a></p>
+<p>安装完成后，打开软件，点击左上角的新建回话按钮，打开新建回话框，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150421.png" alt="20201105201340"></p>
+<p>在【主机】中填写服务器的ip地址，然后点击【连接】按钮，会依次提示输入用户名和密码。连接成功的界面如下所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150422.png" alt="20201105201748"></p>
+<h5 id="文件上传工具"><a href="#文件上传工具" class="headerlink" title="文件上传工具"></a>文件上传工具</h5><p>要想把服务部署到Linux服务器，那就必须把文件传输到服务器中（这是句废话）。根据不同的使用场景，笔者推荐两种方案，分别是XFTP工具上传和git仓库中转。</p>
+<p>使用XFTP上传的方式需要在开发的机器上安装此工具，下载地址：<a target="_blank" rel="noopener" href="https://www.netsarang.com/zh/xftp-download/">https://www.netsarang.com/zh/xftp-download/</a></p>
+<p>安装完成后，可以通过XSHELL一键打开XFTP，XFTP打开后，在软件的右侧可以切换要上传文件的目标路径，然后将文件拖到右侧释放后，就会自动上传了，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150423.gif" alt="a1"></p>
+<p>使用git仓库进行中转的方式是笔者比较推荐的方式，因为在频繁的迭代更新中，如果通过现在本地编译发布后，再将文件拷贝到服务器，这个操作流程稍显繁琐。而通过git仓库周转的方式则相对比较简单，开发者仅需要将开发好的代码推到git仓库，然后在服务器中执行build，publish等操作，少了繁琐的拷贝文件的过程，同时由于build和publish都是在服务器中执行，那么我们就可以通过编写部署脚本的方式，可以最终实现一键快速部署。</p>
+<p>使用git的方案需要在服务器安装git客户端，并配置ssh公钥（配置公钥的目的是拉取私有的仓库，公共参考无需配置公钥）。下面来看具体的操作步骤：</p>
+<p>首先，执行如下命令，安装git客户端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
+
+<p>git安装后，通过如下命令生成sshkey:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 这里的xx@xxx.com只是生成的sshkey的名称，并不约束货要求具体命名为某个邮箱。</span></span><br><span class="line">ssh-keygen -t rsa -C &quot;xx@xxx.com&quot;  </span><br></pre></td></tr></table></figure>
+
+<p>按照提示，按三次回车，即可生成sshkey，如下图所示：<br><img data-src="https://res.aimon.cc/img/20201204150424.png" alt="20201105212252"></p>
+<p>，通过如下命令可查看公钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>复制生成后的sshkey，配置到代码仓库的公钥中。下面简单演示下gitee代码托管平台下如何配置公钥（其他平台大同小异）。</p>
+<p>进入私有仓库的【管理】页面，找到【公钥管理】，点击【添加公钥】，将刚刚生成的公钥复制过去，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150425.png" alt="20201105213004"></p>
+<p>添加后，在终端中输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitee.com</span><br></pre></td></tr></table></figure>
+
+<p>次使用需要确认并添加主机到本机SSH可信列表，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150426.png" alt="20201105213248"></p>
+<p>输入yes后，出现类似于Hi xxx的字样，则表示git公钥配置成功了。</p>
+<h5 id="NET-Core-SDK和运行时"><a href="#NET-Core-SDK和运行时" class="headerlink" title=".NET Core SDK和运行时"></a>.NET Core SDK和运行时</h5><p>.NET运行时是.NET程序运行的先决条件，而SDK并不是必须的，但如果通过git方式进行文件中转的话，就涉及到在服务器端进行编译，所以SDK也需要安装。（<em>注：docker部署方式无需在服务器安装SDK和运行时，下文回提到</em>）<br>下面一起看看在CentOs中如何安装SDK和运行时（其他环境可参考官方文档：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/core/install/linux%EF%BC%89%E3%80%82">https://docs.microsoft.com/zh-cn/dotnet/core/install/linux）。</a></p>
+<p>运行如下命令，将 Microsoft 包签名密钥添加到受信任密钥列表，并添加 Microsoft 包存储库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span><br></pre></td></tr></table></figure>
+
+<p>通过如下命令安装SDK:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y dotnet-sdk-3.1</span><br></pre></td></tr></table></figure>
+
+<p>.NET Core SDK 使你可以通过 .NET Core 开发应用。 如果安装 .NET Core SDK，则无需安装相应的运行时。</p>
+<p>通过如下命令安装运行时：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y aspnetcore-runtime-3.1</span><br></pre></td></tr></table></figure>
+
+<p>注：上述命令中的最后的3.1表示的是版本号，如果安装其他版本，修改对应的版本号即可。参考资料：<a target="_blank" rel="noopener" href="https://dotnet.microsoft.com/download/dotnet-core">https://dotnet.microsoft.com/download/dotnet-core</a></p>
+<h4 id="发布程序到服务器"><a href="#发布程序到服务器" class="headerlink" title="发布程序到服务器"></a>发布程序到服务器</h4><p>在准备工作中已经介绍了两种将文件发布到服务器的方式，下面具体演示下步骤。</p>
+<h5 id="通过XFTP发布到服务器"><a href="#通过XFTP发布到服务器" class="headerlink" title="通过XFTP发布到服务器"></a>通过XFTP发布到服务器</h5><p>首先，准备好要发布的程序，<br>下图是我创建的一个.NET Core3.1的示例代码：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150427.png" alt="20201106132910"></p>
+<p>打开vs的程序包管理器控制台，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet publish -o ./publish</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150428.png" alt="20201106133127"></p>
+<p>在上图可以看到，发布之后的文件的路径为：D:\code\test\BuildTest\publish\</p>
+<p>打开XFTP，将publish文件夹拖到右侧窗口，即可完成上传。</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150429.gif" alt="a2"></p>
+<h5 id="通过git中转。"><a href="#通过git中转。" class="headerlink" title="通过git中转。"></a>通过git中转。</h5><p>首先，将代码推送到git仓库中，复制SSH地址。如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150430.png" alt="20201106141159"></p>
+<p>然后再服务器中，执行克隆命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir code</span><br><span class="line">cd code</span><br><span class="line">git clone git@gitee.com:billsking/build-test.git</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150431.png" alt="20201106141435"></p>
+<p>此时项目代码已经下载到服务器中，切换工作到解决方案所在的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd build-test</span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要执行dotnet publish命令对程序进行编译发布。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet publish -o /root/web/publish</span><br></pre></td></tr></table></figure>
+
+<p>执行完毕后，编译后的文件将被保存在/root/web/publish目录中。将工作目录切换到/root/web/publish，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet BuildTest.dll</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150432.png" alt="20201106143301"></p>
+<p>到这里为止，咱们的程序已经在linux服务器运行起来了。但直接通过dotnet命令仅适合临时测试使用，并不能成为生产场景的解决方案。下面进来跟我一起了解下可用于生产环境的部署方式吧。</p>
+<h4 id="Supervisor-Nginx组合"><a href="#Supervisor-Nginx组合" class="headerlink" title="Supervisor+Nginx组合"></a>Supervisor+Nginx组合</h4><p>Supervisor是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。下面是Supervisor安装方法。<br>执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y supervisor</span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码如果提示：没有可用软件包 supervisor。则需要先安装EPEL源后，再执行上面的命令。安装EPEL源的命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<p>设置开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable supervisord</span><br></pre></td></tr></table></figure>
+
+<p>启动supervisord</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start supervisord</span><br></pre></td></tr></table></figure>
+
+<p>查看状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status supervisord</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150433.png" alt="20201106150000"></p>
+<p>通过vi命令或者XFTP修改配置文件开启web界面访问，如下图所示，分别取消inet_http_server等四个配置的注释：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150434.png" alt="20201106150527"></p>
+<p>执行如下命令，重新加载配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure>
+
+<p>然后在浏览器打开http://你的ip:9001，输入用户名密码后，如图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150435.png" alt="20201106151109"></p>
+<p>看到这个界面，就表示supervisor安装完成了。</p>
+<p>切换到/etc/supervisord.d目录，在此目录创建ini文件，内容如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[program:buildtest] ;表示程序名称，用于在supervisor中显示，无特殊意义。</span><br><span class="line">command&#x3D;&#x2F;bin&#x2F;bash -c &quot;dotnet BuildTest.dll&quot;; 输入执行命令，这里表示执行的是dotnet BuildTest.dll</span><br><span class="line">directory&#x3D;&#x2F;root&#x2F;web&#x2F;publish ; 应用程序根目录 </span><br><span class="line">autostart&#x3D;true ; 是否自动启动，当 supervisor 加载该配置文件的时候立即启动它 </span><br><span class="line">autorestart&#x3D;true ; 是否自动重启， 程序异常退出后自动重启</span><br><span class="line">logfile_maxbytes&#x3D;50MB ; 该配置文件输出单个日志文件的大小，默认50M</span><br><span class="line">logfile_backups&#x3D;10 ; 日志备份个数 </span><br><span class="line">loglevel&#x3D;info ; 记录日志级别 </span><br><span class="line">stdout_logfile&#x3D;&#x2F;root&#x2F;data&#x2F;logs&#x2F;buildtest&#x2F;buildtest.out.log ; 指定标准输出日志文件 </span><br><span class="line">environment&#x3D;ASPNETCORE_ENVIRONMENT&#x3D;Production;环境变量。</span><br><span class="line">user&#x3D;root ;启动服务的用户  </span><br><span class="line">redirect_stderr&#x3D;true;把 stderr 重定向到 stdout，默认 false</span><br></pre></td></tr></table></figure>
+
+<p>++注：stdout_logfile指向的文件夹一定要先创建，否则无法启动。++</p>
+<p>然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure>
+
+<p>命令执行成功后， 刷新浏览器，可以看到如下界面：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150436.png" alt="20201109100404"></p>
+<p>当界面显示running时，则表示我们我们刚刚配置的应用程序运行起来了。</p>
+<p>但现在还存在一个问题，我们的应用程序默认是绑定的5000端口，如果要指定80端口或者配置域名该怎么处理呢？下面就该nginx登场了。</p>
+<p>Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。（来源自百度百科）</p>
+<p>安装方式参考：<a target="_blank" rel="noopener" href="http://nginx.org/en/linux_packages.html#RHEL-CentOS">http://nginx.org/en/linux_packages.html#RHEL-CentOS</a></p>
+<p>安装先决条件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+<p>设置yum存储库，先创建一下内容的文件：/etc/yum.repos.d/nginx.repo</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nginx-stable]</span></span><br><span class="line"><span class="attr">name</span>=nginx stable repo</span><br><span class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://nginx.org/keys/nginx_signing.key</span><br><span class="line"><span class="attr">module_hotfixes</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="section">[nginx-mainline]</span></span><br><span class="line"><span class="attr">name</span>=nginx mainline repo</span><br><span class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/mainline/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">gpgkey</span>=https://nginx.org/keys/nginx_signing.key</span><br><span class="line"><span class="attr">module_hotfixes</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，使用稳定 nginx 包的存储库。如果要使用主线 nginx 包，请运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --enable nginx-mainline</span><br></pre></td></tr></table></figure>
+
+<p>运行如下命令安装nginx：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<p>设置开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure>
+
+<p>启动nginx：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+
+<p>此时，就可以在浏览器通过ip访问了：<a target="_blank" rel="noopener" href="http://你的ip/">http://你的ip</a>，界面如下：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150437.png" alt="20201109101553"></p>
+<p>nginx安装完成后，切换到/etc/nginx/conf.d目录，修改default.conf文件内容，如下所示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://0.0.0.0:5000;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    <span class="attr">location</span> = /<span class="number">50</span>x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存后，执行如下命令，重新加载配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>然后再次访问http://你的ip，幸运的话，你应该可以看到如下的界面，表示你的.NET Core程序已经完美运行在linux系统了。</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150438.png" alt="20201109111932"></p>
+<p>如果你不幸的看到了如下界面：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150439.png" alt="20201109112035"></p>
+<p>不要着急，继续往下看。</p>
+<p>出现这个问题的原因是因为SeLinux的限制，执行如下命令之后，再刷新页面：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0     </span><br></pre></td></tr></table></figure>
+
+<p>如果还是看到的错误页面，就需要去查看nginx的日志了，默认的日志路径为：/var/log/nginx</p>
+<p>通过setenforce 0命令，只是临时实效，重启后回失效的。一劳永逸的做法是，修改/etc/selinux/config 文件，　将<strong>SELINUX=enforcing改为SELINUX=disabled</strong>，然后重启机器。</p>
+<p>后面如果你需要更新你的应用程序，只需要将代码提交到git仓库，然后在服务器中执行git pull和dotnet publish就行了。</p>
+<p>如果你对shell比较熟悉的话，还可以通过编写shell命令一键执行应用程序的更新，下面是我写的示例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/bin/bash</span></span><br><span class="line">cd /root/code/build-test</span><br><span class="line">git pull</span><br><span class="line">dotnet publish -o /root/web/publish</span><br><span class="line">supervisorctl restart buildtest</span><br></pre></td></tr></table></figure>
+
+<p>将上述的代码保存问sh文件，上传到服务器，并设置权限。如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150440.png" alt="20201109142811"></p>
+<p>代码提交到git仓库后，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build.sh</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150441.png" alt="20201109143151"></p>
+<p>总结一下，这种方式需要在服务端安装两个软件，supervisor和nginx，supervisor一个作为守护线程，用于维护应用程序的生命周期的。nginx则是作为反向代理使用。维护起来相对麻烦，那么有没有一个像IIS一样，既可以维护应用程序的生命周期，又可以对外暴露服务呢？答案是肯定的，继续往下看。</p>
+<p>Jexus</p>
+<blockquote>
+<p>　　Jexus是一款Linux平台上的高性能WEB服务器和负载均衡网关服务器，以支持ASP.NET、ASP.NET CORE、PHP为特色，同时具备反向代理、入侵检测等重要功能。可以这样说，Jexus是.NET、.NET CORE跨平台的最优秀的宿主服务器，如果我们认为它是Linux平台的IIS，这并不为过，因为，Jexus不但非常快，而且拥有IIS和其它Web服务器所不具备的高度的安全性。同时，Jexus Web Server 是完全由中国人自主开发的的国产软件，真正做到了“安全、可靠、可控”， 具备我国党政机关和重要企事业单位信息化建设所需要的关键品质。</p>
+</blockquote>
+<p>以上内容摘自jexus官网：<a target="_blank" rel="noopener" href="https://www.jexus.org/">https://www.jexus.org/</a></p>
+<p>废话不多说，直接进入正题，首先是安装。</p>
+<p>jexus的安装非常简单，执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://jexus.org/release/x64/install.sh|sudo sh</span><br></pre></td></tr></table></figure>
+
+<p>注：如果在这之前你已经安装了nginx，需要先将nginx绑定的80端口释放，或者卸载nginx。</p>
+<p>安装完成后，切换到/usr/jexus目录，修改/usr/jexus/siteconf目录下的default，内容如下所示：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">port</span>=<span class="number">80</span> <span class="comment">#端口</span></span><br><span class="line"><span class="attr">hosts</span>=*    <span class="comment">#域名</span></span><br><span class="line"><span class="attr">AppHost</span>=&#123;cmd=dotnet BuildTest.dll<span class="comment">; root=/root/web/publish; port=0&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/jexus/jws restart</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150442.png" alt="20201109162034"></p>
+<p>当你看到执行结果为OK时，即可认为应用程序已经启动了。最后，执行如下命令，看下执行的结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150443.png" alt="20201109162246"></p>
+<p>关于jexus更详细的使用说明，请参考官方文档。</p>
+<p>Docker+Nginx或Jexus</p>
+<p>上面讲到的， 不管是通过supervisor+nginx还是jexus，都需要在服务器安装 .NET Core的SDK或者运行时，假如咱们有好多个应用程序，有的用 .NET Core2.1，有的用 .NET Core3.1，有的用.NET5，那么上面的做法就需要咱们分别安装对应的SDK或者运行时，对于维护还是比较麻烦的。Docker的出现，可以完美解决上述问题。</p>
+<p>关于Docker的介绍，有兴趣的可自行百度。下面来跟我一起来看下如何安装并使用Docker。</p>
+<p>执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>执行这个命令后，脚本就会自动的将一切准备工作做好，并且把Docker的稳定版本安装在系统中。</p>
+<p>执行如下命令设置docker开机启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<p>执行如下命令启动docker:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>安装docker之后，我们需要在代码里增加dockerfile文件。什么？不会docker？不要紧，万能的Visual Studio可以帮你自动生成。在解决方案中，右击项目名称，依次选择【添加】，【Docker支持】，如下图所示：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150444.png" alt="20201109165524"></p>
+<p>生成的dockerfile文件如下所示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base</span><br><span class="line">WORKDIR /app</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build</span><br><span class="line">WORKDIR /src</span><br><span class="line">COPY [&quot;BuildTest/BuildTest.csproj&quot;, &quot;BuildTest/&quot;]</span><br><span class="line">RUN dotnet restore &quot;BuildTest/BuildTest.csproj&quot;</span><br><span class="line">COPY . .</span><br><span class="line">WORKDIR &quot;/src/BuildTest&quot;</span><br><span class="line">RUN dotnet build &quot;BuildTest.csproj&quot; -c Release -o /app/build</span><br><span class="line"></span><br><span class="line">FROM build AS publish</span><br><span class="line">RUN dotnet publish &quot;BuildTest.csproj&quot; -c Release -o /app/publish</span><br><span class="line"></span><br><span class="line">FROM base AS final</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY --from=publish /app/publish .</span><br><span class="line">ENTRYPOINT [&quot;dotnet&quot;, &quot;BuildTest.dll&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>将代码推送到git仓库，然后再linux服务器中拉取最新代码。</p>
+<p>切换到/root/code/build-test目录，执行如下命令，拉取最新代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p>然后执行如下命令，将代码打包为镜像：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f ./BuildTest/Dockerfile -t buildtest .</span><br></pre></td></tr></table></figure>
+
+<p>由于首次打包镜像的时候涉及到拉取.NET Core的官方镜像，拉取速度可能较慢，请耐心等待。打包完成后，执行如下命令，可查看当前服务器已存在的镜像：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://res.aimon.cc/img/20201204150445.png" alt="20201109170929"></p>
+<p>镜像打包完成后，我们就可以通过docker run运行下，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 82:80 -dit --restart=always --name buildtest buildtest</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img data-src="https://res.aimon.cc/img/20201204150446.png" alt="20201109171049"></p>
+<p>通过浏览器访问：<a target="_blank" rel="noopener" href="http://ip:82/">http://ip:82</a>。如无意外，你将看到你的应用程序已经成功运行了。</p>
+<p>相同的道理，我们也是可以通过编写shell脚本的方式，实现一键更新应用程序的。在/root目录中，创建dockerbuild.sh文件，文件内容如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/bin/bash</span></span><br><span class="line"></span><br><span class="line">cd /root/code/build-test</span><br><span class="line">git pull</span><br><span class="line"><span class="attr">imtag</span>=$(uuidgen |sed <span class="string">&#x27;s/-//g&#x27;</span>)</span><br><span class="line">docker build -f ./BuildTest/Dockerfile -t buildtest:$&#123;imtag&#125; .</span><br><span class="line">docker stop buildtest</span><br><span class="line">docker rm buildtest</span><br><span class="line">docker run -dit --restart=always --name buildtest -p 82:80  buildtest:$&#123;imtag&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给dockerbuild.sh文件设置执行权限，命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 dockerbuild.sh</span><br></pre></td></tr></table></figure>
+
+<p>当有新代码推送到git仓库时，进入服务器，执行dockerbuild.sh即可快速更新应用程序。</p>
+<p>到这里，.NET Core部署到linux服务器的方案已“基本”介绍完毕了。</p>
+<p>为什么说是“基本”呢？不知道大家有没有发现，虽然目前的方案可以实现一键部署更新，但。。。。，我们还是需要登陆到linux服务器去执行这个命令，显然，这不是最好的方法。有没有更好的方案呢？如果当我们提交给git仓库后，自动出发部署命令是不是就更方便了呢？</p>
+<p>答案是肯定的，我们可以借助jenkins来实现。限于篇幅，本篇文章就不讲解了，如有兴趣，你也可以先自行研究，或者敬请期待下次的讲解。</p>
+<p>最后说明下，以上的方案还是存在很多的问题，对于小型团队已经够用，大型项目的终极解决方案应该是基于k8s实现的devops。其实k8s实现devops的原理和我上述介绍的方案基本一致。借助与gitlab的runner或者jenkins，监听git仓库的状态，当发现指定的分支发生变化后，打包镜像，然后通过替换k8s的deployment的镜像来实现自动更新。同时，k8s实现了弹性伸缩、滚动更新等功能。</p>
+<blockquote>
+<p>转自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/fulu/p/13983734.html#!comments">https://www.cnblogs.com/fulu/p/13983734.html#!comments</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>aimon
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.aimon.cc/post/af369074.html" title=".NET5部署到Linux">https://www.aimon.cc/post/af369074.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c#</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/13860cc7.html" rel="prev" title="Asp.Net Core中JWT刷新Token解决方案">
+                  <i class="fa fa-chevron-left"></i> Asp.Net Core中JWT刷新Token解决方案
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备2020066310号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">六月的雨</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+  <script>
+    NProgress.configure({
+      showSpinner: true
+    });
+    NProgress.start();
+    document.addEventListener('readystatechange', () => {
+      if (document.readyState === 'interactive') {
+        NProgress.inc(0.8);
+      }
+      if (document.readyState === 'complete') {
+        NProgress.done();
+      }
+    });
+    document.addEventListener('pjax:send', () => {
+      NProgress.start();
+    });
+    document.addEventListener('pjax:success', () => {
+      NProgress.done();
+    });
+  </script>
+
+  
+
+
+
+
+    <div class="pjax">
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://www.aimon.cc/post/af369074.html',]
+      });
+      });
+  </script>
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
