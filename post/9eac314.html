@@ -25,7 +25,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.aimon.cc","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"bounceInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.aimon.cc","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"bounceInLeft"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="一、Typora基本语法指南Typora简介Typora是一款轻便简洁的Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。即时渲染使得你写Markdown就想是写Word文档一样流畅自如，不像其他编辑器的有编辑栏和显示栏。  Typora删除了预览窗口，以及所有其他不必要的干扰。取而代之的是实时预览。 Markdown的语法因不同的解析器或编辑器而异，Typ">
 <meta property="og:type" content="article">
@@ -271,14 +271,14 @@
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/mqzzzz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mqzzzz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21xenp6eg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mqzzzz"><i class="fab fa-github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:mqzzzz@qq.com" title="E-Mail → mailto:mqzzzz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOm1xenp6ekBxcS5jb20=" title="E-Mail → mailto:mqzzzz@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
   <div class="cc-license site-overview-item animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
   </div>
 
 
@@ -534,7 +534,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">### 脚注</span><br><span class="line"></span><br><span class="line">在需要添加脚注的文字后面+[+^+序列+]，注释的产生可以鼠标放置其上单击自动产生，添加信息</span><br><span class="line"></span><br><span class="line">或人工添加+[+^+序列+]+:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;text</span><br><span class="line">脚注产生的方法[^footnote].</span><br><span class="line">[^footnote]:这个就是&quot;脚注&quot;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>脚注的产生方法[1]</p>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>链接<br>输入网址，单击链接，展开后可编辑<br>ctr+单击，打开链接<br>例如：<a href="https://link.zhihu.com/?target=https://www.baidu.com">https://www.baidu.com</a></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>链接<br>输入网址，单击链接，展开后可编辑<br>ctr+单击，打开链接<br>例如：<span class="exturl" data-url="aHR0cHM6Ly9saW5rLnpoaWh1LmNvbS8/dGFyZ2V0PWh0dHBzOi8vd3d3LmJhaWR1LmNvbQ==">https://www.baidu.com<i class="fa fa-external-link-alt"></i></span></p>
 <p>常用链接方法</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文字链接 [链接名称](http://链接网址)网址链接 &lt;http://链接网址&gt;</span><br></pre></td></tr></table></figure>
 
@@ -557,7 +557,7 @@
 <h3 id="URLs"><a href="#URLs" class="headerlink" title="URLs"></a>URLs</h3><p>用&lt;&gt;括住url，可手动设置url对于标准URLs，可自动识别</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;www.baidu.com&gt;</span><br></pre></td></tr></table></figure>
 
-<p>&lt;<a target="_blank" rel="noopener" href="http://www.baidu.com&gt;/">www.baidu.com&gt;</a></p>
+<p>&lt;<span class="exturl" data-url="aHR0cDovL3d3dy5iYWlkdS5jb20mZ3Q7Lw==">www.baidu.com&gt;<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>开头*/+/- 加空格+文字，可以创建无序序列，换行键换行，删除键+shift+tab跳出<br>开头1.加空格+后接文字，可以创建有序序列例：</p>
 <ul>
 <li>第一个无序序列</li>
@@ -580,7 +580,7 @@
 <li>第四个可选序列<br>总结：先输入减号，然后输入空格，之后就变成了黑色圆点，在输入[]，在中间加个空格，回车就可以注：任务列表无快捷键，可以点击菜单栏段落，任务列表。</li>
 </ul>
 <h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><blockquote>
-<p>Typora文本文档中有使用图片内容，如果需要发布在各个兼容Markdown的软件平台，需要预先上传文档中的图片至图床，再通过对图床的图片链接调用，才能正常显示，否则各个平台将无法看到该文档图片。<br>免费图床网址：<a target="_blank" rel="noopener" href="https://sm.ms/">https://sm.ms/</a>图床设置：[Typora图床自动上传图片设置篇]</p>
+<p>Typora文本文档中有使用图片内容，如果需要发布在各个兼容Markdown的软件平台，需要预先上传文档中的图片至图床，再通过对图床的图片链接调用，才能正常显示，否则各个平台将无法看到该文档图片。<br>免费图床网址：<span class="exturl" data-url="aHR0cHM6Ly9zbS5tcy8=">https://sm.ms/<i class="fa fa-external-link-alt"></i></span>图床设置：[Typora图床自动上传图片设置篇]</p>
 </blockquote>
 <ol>
 <li>手动添加：跟链接的方法区别在于前面加了个感叹号 <code>!</code>，这样是不是觉得好记多了呢？</li>
@@ -605,19 +605,19 @@
 <h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>Typora : markdown 文档写作工具</p>
 <p>PicGo : 图床工具</p>
 <p>七牛云/腾讯云/阿里云等</p>
-<h3 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h3><h3 id="1-下载所需软件"><a href="#1-下载所需软件" class="headerlink" title="1. 下载所需软件"></a>1. 下载所需软件</h3><p><a target="_blank" rel="noopener" href="https://typora.io/">Typora</a></p>
-<p><a target="_blank" rel="noopener" href="https://molunerfinn.com/PicGo/">PicGo</a></p>
+<h3 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h3><h3 id="1-下载所需软件"><a href="#1-下载所需软件" class="headerlink" title="1. 下载所需软件"></a>1. 下载所需软件</h3><p><span class="exturl" data-url="aHR0cHM6Ly90eXBvcmEuaW8v">Typora<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9tb2x1bmVyZmlubi5jb20vUGljR28v">PicGo<i class="fa fa-external-link-alt"></i></span></p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132148802.png" alt="image-20200427103351795"></p>
 <p>安装完成如下图所示：</p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132148904.png" alt="image-20200427104505410"></p>
 <p>如果无法下载可以使用以下百度云：</p>
-<p>链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1JRDb4iojTMAV5WBFHahRaw">https://pan.baidu.com/s/1JRDb4iojTMAV5WBFHahRaw</a> 提取码：gkt9</p>
+<p>链接：<span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMUpSRGI0aW9qVE1BVjVXQkZIYWhSYXc=">https://pan.baidu.com/s/1JRDb4iojTMAV5WBFHahRaw<i class="fa fa-external-link-alt"></i></span> 提取码：gkt9</p>
 <h3 id="2-配置-PicGo"><a href="#2-配置-PicGo" class="headerlink" title="2. 配置 PicGo"></a>2. 配置 PicGo</h3><p>2.1 打开软件， 图床 -&gt; 七牛云</p>
 <p><img data-src="https://img-blog.csdnimg.cn/2020042713214973.png" alt="image-20200427105128957"></p>
 <p>2.2 配置七牛云图床</p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132149270.png" alt="image-20200427105207374"></p>
-<p>七牛云的配置购买很简单，可以通过<a target="_blank" rel="noopener" href="https://portal.qiniu.com/signup?code=1hjikucr9mmoi">以下链接</a>直接购买并使用，</p>
-<p>具体配置如何购买及配置域名相关流程可以参考文章<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/29f33ca6e491">OpenWrite 编辑器如何配置七牛云</a></p>
+<p>七牛云的配置购买很简单，可以通过<span class="exturl" data-url="aHR0cHM6Ly9wb3J0YWwucWluaXUuY29tL3NpZ251cD9jb2RlPTFoamlrdWNyOW1tb2k=">以下链接<i class="fa fa-external-link-alt"></i></span>直接购买并使用，</p>
+<p>具体配置如何购买及配置域名相关流程可以参考文章<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8yOWYzM2NhNmU0OTE=">OpenWrite 编辑器如何配置七牛云<i class="fa fa-external-link-alt"></i></span></p>
 <p>2.3 通过 2.2 的链接购买七牛云之后，到七牛云的界面进行配置</p>
 <p><img data-src="https://img-blog.csdnimg.cn/20200427132149446.png" alt="image-20200427105806627"></p>
 <p>2.4 上传文件，检验是否配置成功</p>
@@ -657,7 +657,7 @@
       <a href="https://www.aimon.cc/post/9eac314.html" title="Typora完全使用教程">https://www.aimon.cc/post/9eac314.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC96aC1DTg=="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -717,7 +717,8 @@
   <footer class="footer">
     <div class="footer-inner">
 
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备2020066310号 </a>
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">苏ICP备2020066310号 </span>
+      <img src="http://www.beian.gov.cn/portal/download" style="display: inline-block;"><span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5nb3YuY24vcG9ydGFsL3JlZ2lzdGVyU3lzdGVtSW5mbz9yZWNvcmRjb2RlPTMyMDMwNTAyMDAwMjg0">苏公网安备 32030502000284号 </span>
   </div>
 
 <div class="copyright">
@@ -774,6 +775,15 @@ document.addEventListener('pjax:success', () => {
 
 
   
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 <script src="/js/local-search.js"></script>
 
